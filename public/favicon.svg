@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 86" fill="none">
+  <defs>
+    <linearGradient id="favGold" x1="0%" y1="0%" x2="100%" y2="85%">
+      <stop offset="0%" stop-color="#FFE066" />
+      <stop offset="35%" stop-color="#FFB703" />
+      <stop offset="75%" stop-color="#FB8500" />
+      <stop offset="100%" stop-color="#E85D04" />
+    </linearGradient>
+    <linearGradient id="favViolet" x1="10%" y1="0%" x2="95%" y2="100%">
+      <stop offset="0%" stop-color="#E9D5FF" />
+      <stop offset="30%" stop-color="#C084FC" />
+      <stop offset="70%" stop-color="#9333EA" />
+      <stop offset="100%" stop-color="#6B21A8" />
+    </linearGradient>
+    <linearGradient id="favSpec" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+
+  <!-- Left wing of V (Gold) -->
+  <polygon points="8,14 28,14 47,74 31,74 6,19" fill="url(#favGold)" />
+  <polygon points="8,14 28,14 25,20 10,20" fill="url(#favSpec)" opacity="0.9" />
+
+  <!-- Upper loop of R (Gold) -->
+  <path d="M 37,14 L 72,14 L 88,30 L 88,40 L 75,50 L 46,50 L 49,41 L 68,41 L 76,34 L 76,32 L 68,23 L 42,23 Z" fill="url(#favGold)" />
+  <path d="M 37,14 L 72,14 L 88,30 L 82,30 L 69,18 L 40,18 Z" fill="url(#favSpec)" opacity="0.85" />
+
+  <!-- Center interlocking chips (Violet) -->
+  <polygon points="33,26 49,26 45,33 29,33" fill="#DDD6FE" />
+  <polygon points="27,37 44,37 36,74 21,74" fill="url(#favViolet)" />
+  <polygon points="42,62 52,62 48,73 38,73" fill="#C084FC" />
+
+  <!-- Right leg of R (Violet) -->
+  <polygon points="53,46 68,46 88,74 68,74" fill="url(#favViolet)" />
+</svg>

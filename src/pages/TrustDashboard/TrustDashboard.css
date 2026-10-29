@@ -1,0 +1,336 @@
+.trust-dashboard-page {
+  min-height: 100vh;
+  padding-bottom: 80px;
+}
+
+.trust-hero-banner {
+  background: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.15), transparent 70%),
+              linear-gradient(180deg, #09121a 0%, #070611 100%);
+  padding: 60px 20px 40px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.trust-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  padding: 6px 14px;
+  border-radius: 30px;
+  color: #38bdf8;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  margin-bottom: 16px;
+}
+
+.trust-page-title {
+  font-size: 2.6rem;
+  font-weight: 900;
+  line-height: 1.2;
+  margin: 0 0 16px;
+  color: #fff;
+}
+
+.trust-page-subtitle {
+  max-width: 680px;
+  margin: 0 auto 36px;
+  font-size: 1rem;
+  color: #94a3b8;
+  line-height: 1.6;
+}
+
+/* Trust Metrics Grid */
+.trust-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.trust-metric-box {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 14px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+}
+
+.metric-label {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+}
+
+.trust-metric-box strong {
+  font-size: 1.55rem;
+  font-weight: 900;
+}
+
+.trust-metric-box small {
+  font-size: 0.72rem;
+  color: #64748b;
+}
+
+.green-txt { color: #34d399 !important; }
+.blue-txt { color: #38bdf8 !important; }
+.purple-txt { color: #c084fc !important; }
+.gold-txt { color: #fbbf24 !important; }
+.orange-txt { color: #f59e0b !important; }
+
+.trust-main-section {
+  padding: 36px 20px;
+}
+
+/* Revenue Split Card */
+.revenue-model-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 28px;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 32px;
+  margin-bottom: 40px;
+}
+
+.rm-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.rm-title-row h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #fff;
+}
+
+.rm-left p {
+  font-size: 0.86rem;
+  color: #94a3b8;
+  line-height: 1.5;
+  margin: 0 0 20px;
+}
+
+.split-bars-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.split-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.split-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  color: #cbd5e1;
+}
+
+.split-info strong {
+  font-weight: 600;
+}
+
+.split-bar-bg {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.split-bar-fill {
+  height: 100%;
+  border-radius: 8px;
+}
+
+.split-bar-fill.green { background: #10b981; }
+.split-bar-fill.orange { background: #f59e0b; }
+.split-bar-fill.blue { background: #38bdf8; }
+.split-bar-fill.purple { background: #a855f7; }
+
+/* Right Guarantee Box */
+.guarantee-box {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(6, 78, 59, 0.12));
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: 14px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+}
+
+.guarantee-box h4 {
+  margin: 12px 0 8px;
+  font-size: 1.15rem;
+  color: #fff;
+}
+
+.guarantee-box p {
+  font-size: 0.84rem;
+  color: #cbd5e1;
+  line-height: 1.5;
+  margin: 0 0 20px;
+}
+
+.read-report-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  transition: all 0.2s ease;
+}
+
+.read-report-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* 11 Partner Audit Table */
+.partner-audit-section {
+  margin-bottom: 40px;
+}
+
+.pas-table-wrap {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  overflow-x: auto;
+}
+
+.pas-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.84rem;
+}
+
+.pas-table th {
+  padding: 12px 14px;
+  color: #64748b;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.pas-table td {
+  padding: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.net-name {
+  color: #38bdf8;
+  font-size: 0.9rem;
+}
+
+.audit-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  white-space: nowrap;
+}
+
+.tasks-desc, .country-desc, .tracking-desc, .support-desc {
+  display: block;
+  font-size: 0.78rem;
+  color: #cbd5e1;
+  line-height: 1.35;
+  max-width: 220px;
+}
+
+.rating-txt {
+  color: #fbbf24;
+  font-size: 0.9rem;
+}
+
+/* Anti-Fraud Charter Card */
+.anti-fraud-charter-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.afc-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.afc-header h4 {
+  margin: 0;
+  font-size: 1.15rem;
+  color: #fff;
+}
+
+.afc-intro {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  margin: 0 0 20px;
+  max-width: 760px;
+  line-height: 1.5;
+}
+
+.charter-points-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.cp-box {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.cp-box strong {
+  display: block;
+  font-size: 0.88rem;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.cp-box p {
+  margin: 0;
+  font-size: 0.78rem;
+  color: #94a3b8;
+  line-height: 1.45;
+}
+
+@media (max-width: 860px) {
+  .trust-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .revenue-model-card {
+    grid-template-columns: 1fr;
+  }
+  .charter-points-grid {
+    grid-template-columns: 1fr;
+  }
+}

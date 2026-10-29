@@ -1,0 +1,27 @@
+.veloop-rewards-app {
+  min-height: 100vh;
+  background-color: #070611;
+  color: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+}
+
+main {
+  flex: 1;
+}
+
+/* Common container */
+.section-container {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+/* Global button focus visibility */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 2px solid #a855f7;
+  outline-offset: 3px;
+}
