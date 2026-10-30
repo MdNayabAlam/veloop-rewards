@@ -495,7 +495,36 @@
 
 @media (max-width: 900px) {
   .floating-hero-box {
-    display: none;
+    display: flex !important;
+  }
+  .floating-hero-box.left-box {
+    left: 2%;
+    top: 50px;
+    width: 95px;
+    opacity: 0.85;
+  }
+  .floating-hero-box.right-box {
+    right: 2%;
+    top: 50px;
+    width: 95px;
+    opacity: 0.85;
+  }
+  .hero-gift-img {
+    max-width: 80px !important;
+    height: auto !important;
+  }
+  .pedestal-podium-wrap,
+  .podium-podium-wrap {
+    width: 85px !important;
+    height: 35px !important;
+  }
+  .podium-ellipse-outer {
+    width: 80px !important;
+    height: 22px !important;
+  }
+  .podium-ellipse-inner {
+    width: 55px !important;
+    height: 14px !important;
   }
   .hero-status-timer-card {
     flex-direction: column;
@@ -511,7 +540,49 @@
 
 @media (max-width: 640px) {
   .veloop-hero-banner {
-    padding: 24px 14px 28px;
+    padding: 24px 10px 28px;
+    overflow: hidden;
+  }
+  .floating-hero-box {
+    display: flex !important;
+    position: absolute;
+    z-index: 1;
+    pointer-events: none;
+  }
+  .floating-hero-box.left-box {
+    left: 2px;
+    top: 14px;
+    width: 64px;
+    opacity: 0.85;
+  }
+  .floating-hero-box.right-box {
+    right: 2px;
+    top: 14px;
+    width: 64px;
+    opacity: 0.85;
+  }
+  .hero-gift-img {
+    max-width: 54px !important;
+    max-height: 54px !important;
+    height: auto !important;
+  }
+  .pedestal-podium-wrap,
+  .podium-podium-wrap {
+    width: 64px !important;
+    height: 22px !important;
+    bottom: -2px !important;
+  }
+  .podium-beam {
+    width: 44px !important;
+    height: 36px !important;
+  }
+  .podium-ellipse-outer {
+    width: 58px !important;
+    height: 16px !important;
+  }
+  .podium-ellipse-inner {
+    width: 38px !important;
+    height: 10px !important;
   }
   .hero-top-badges-row {
     gap: 8px;

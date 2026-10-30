@@ -370,6 +370,64 @@
 }
 
 /* ======================================================== */
+/* Mobile Art Showcase (Shown on <= 960px)                  */
+/* ======================================================== */
+.exclusive-mobile-art-showcase {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin: 12px 0 18px;
+  width: 100%;
+}
+
+.mobile-art-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-art-item.gift-box-wrapper {
+  width: 110px;
+  height: 100px;
+}
+
+.mobile-floating-gift-img {
+  width: 95px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.7))
+          drop-shadow(0 0 18px rgba(168, 85, 247, 0.45));
+  animation: gift-float 4s ease-in-out infinite alternate;
+}
+
+.mobile-pedestal-glow {
+  position: absolute;
+  bottom: 2px;
+  width: 90px;
+  height: 24px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(168, 85, 247, 0.7) 0%, rgba(99, 102, 241, 0.35) 60%, transparent 80%);
+  filter: blur(6px);
+  pointer-events: none;
+}
+
+.mobile-art-item.ticket-hand-wrapper {
+  width: 130px;
+  height: 100px;
+}
+
+.mobile-floating-ticket-img {
+  width: 125px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.7))
+          drop-shadow(0 0 18px rgba(168, 85, 247, 0.35));
+  animation: ticket-hand-hover 5s ease-in-out infinite alternate;
+}
+
+/* ======================================================== */
 /* Responsive Styles                                        */
 /* ======================================================== */
 @media (max-width: 1200px) {
@@ -391,8 +449,11 @@
     text-align: center;
     padding: 60px 20px 32px;
   }
-  .exclusive-art-col {
-    display: none;
+  .desktop-only-art {
+    display: none !important;
+  }
+  .exclusive-mobile-art-showcase {
+    display: flex !important;
   }
   .exclusive-code-badge-btn {
     top: 18px;
@@ -406,35 +467,78 @@
 
 @media (max-width: 640px) {
   .exclusive-banner-section {
-    padding: 20px 0 32px;
+    padding: 16px 0 28px;
   }
   .exclusive-reward-card {
     border-radius: 20px;
-    padding: 56px 14px 28px;
+    padding: 50px 12px 24px;
+  }
+  .exclusive-mobile-art-showcase {
+    display: flex !important;
+    gap: 12px;
+    margin: 8px 0 14px;
+  }
+  .mobile-art-item.gift-box-wrapper {
+    width: 95px;
+    height: 85px;
+  }
+  .mobile-floating-gift-img {
+    width: 82px;
+  }
+  .mobile-pedestal-glow {
+    width: 75px;
+    height: 20px;
+  }
+  .mobile-art-item.ticket-hand-wrapper {
+    width: 110px;
+    height: 85px;
+  }
+  .mobile-floating-ticket-img {
+    width: 105px;
   }
   .exclusive-headline {
-    font-size: 1.7rem;
-    margin-bottom: 8px;
+    font-size: 1.45rem;
+    margin-bottom: 6px;
   }
   .exclusive-description {
-    font-size: 0.85rem;
-    margin-bottom: 20px;
+    font-size: 0.8rem;
+    margin-bottom: 16px;
   }
   .exclusive-badges-row {
     flex-direction: column;
-    gap: 8px;
-    margin-bottom: 22px;
+    gap: 7px;
+    margin-bottom: 18px;
     width: 100%;
   }
   .exclusive-badge-item {
     width: 100%;
     justify-content: flex-start;
-    padding: 8px 12px;
+    padding: 7px 10px;
   }
-  .exclusive-enter-cta-btn {
+  .exclusive-enter-cta {
     width: 100%;
-    padding: 13px 20px;
-    font-size: 0.88rem;
+    padding: 12px 18px;
+    font-size: 0.86rem;
     justify-content: center;
+  }
+}
+
+@media (max-width: 360px) {
+  .exclusive-mobile-art-showcase {
+    gap: 8px;
+  }
+  .mobile-art-item.gift-box-wrapper {
+    width: 82px;
+    height: 75px;
+  }
+  .mobile-floating-gift-img {
+    width: 72px;
+  }
+  .mobile-art-item.ticket-hand-wrapper {
+    width: 95px;
+    height: 75px;
+  }
+  .mobile-floating-ticket-img {
+    width: 90px;
   }
 }

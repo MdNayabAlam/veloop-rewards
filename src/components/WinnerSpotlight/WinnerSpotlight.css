@@ -199,3 +199,48 @@
     justify-content: center;
   }
 }
+
+@media (max-width: 640px) {
+  .winner-spotlight-banner {
+    padding: 0 10px;
+    margin: 18px 0;
+  }
+  .spotlight-inner {
+    padding: 20px 14px;
+    border-radius: 18px;
+    gap: 16px;
+  }
+  .trophy-badge {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+  }
+  .spotlight-prize-title {
+    font-size: 1.25rem;
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+  .spotlight-desc {
+    font-size: 0.78rem;
+    line-height: 1.45;
+    margin-bottom: 12px;
+  }
+  .spotlight-meta-tags {
+    gap: 6px;
+    justify-content: center;
+  }
+  .meta-tag {
+    font-size: 0.65rem;
+    padding: 3px 8px;
+  }
+  .spotlight-prize-preview {
+    width: 110px;
+    height: 90px;
+  }
+  .claim-now-cta {
+    padding: 12px 20px;
+    font-size: 0.88rem;
+    border-radius: 12px;
+    gap: 8px;
+  }
+}

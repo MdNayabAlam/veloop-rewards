@@ -33,7 +33,7 @@ export default function ExclusiveRewardsBanner() {
           </button>
 
           {/* Left: 3D Purple Gift Box on Glowing Pedestal */}
-          <div className="exclusive-art-col left-art">
+          <div className="exclusive-art-col left-art desktop-only-art">
             <div className="pedestal-neon-glow" />
             <img
               src="/assets/gift box.png"
@@ -49,6 +49,30 @@ export default function ExclusiveRewardsBanner() {
 
           {/* Center: Main Banner Content matching Ref_01.jpeg */}
           <div className="exclusive-center-content">
+            {/* Mobile Art Showcase: Shows BOTH Gift Box and Hand-Ticket side by side on mobile */}
+            <div className="exclusive-mobile-art-showcase" aria-hidden="true">
+              <div className="mobile-art-item gift-box-wrapper">
+                <div className="mobile-pedestal-glow" />
+                <img
+                  src="/assets/gift box.png"
+                  alt="Exclusive VELOOP Gift Box with gold ribbon"
+                  className="mobile-floating-gift-img"
+                />
+                <span className="confetti-dot dot-1" />
+                <span className="confetti-dot dot-2" />
+              </div>
+
+              <div className="mobile-art-item ticket-hand-wrapper">
+                <img
+                  src="/assets/giveaway card.png"
+                  alt="Hand holding gold & black VELOOP giveaway ticket"
+                  className="mobile-floating-ticket-img"
+                />
+                <span className="ribbon-sparkle ribbon-1" />
+                <span className="ribbon-sparkle ribbon-2" />
+              </div>
+            </div>
+
             <div className="kicker-sparkle-row">
               <Sparkles size={14} className="sparkle-star" />
               <span className="kicker-text">Unlock Amazing Rewards</span>
@@ -106,7 +130,7 @@ export default function ExclusiveRewardsBanner() {
           </div>
 
           {/* Right: Hand Holding Ticket from Ref_01.jpeg */}
-          <div className="exclusive-art-col right-art">
+          <div className="exclusive-art-col right-art desktop-only-art">
             <img
               src="/assets/giveaway card.png"
               alt="Hand holding gold & black VELOOP giveaway ticket"
