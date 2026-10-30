@@ -403,3 +403,38 @@
     transform: translateX(-50%) translateY(-2px);
   }
 }
+
+@media (max-width: 640px) {
+  .exclusive-banner-section {
+    padding: 20px 0 32px;
+  }
+  .exclusive-reward-card {
+    border-radius: 20px;
+    padding: 56px 14px 28px;
+  }
+  .exclusive-headline {
+    font-size: 1.7rem;
+    margin-bottom: 8px;
+  }
+  .exclusive-description {
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+  }
+  .exclusive-badges-row {
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 22px;
+    width: 100%;
+  }
+  .exclusive-badge-item {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 8px 12px;
+  }
+  .exclusive-enter-cta-btn {
+    width: 100%;
+    padding: 13px 20px;
+    font-size: 0.88rem;
+    justify-content: center;
+  }
+}

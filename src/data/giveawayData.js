@@ -27,6 +27,7 @@ export const currentGiveawayData = {
       value: "₹1,19,900",
       image: "/assets/iphone.png",
       color: "purple",
+      category: "tech",
       type: "PHYSICAL",
       winnerCount: 1,
       entryFee: 250,
@@ -57,6 +58,7 @@ export const currentGiveawayData = {
       value: "₹41,900",
       image: "/assets/watch.png",
       color: "blue",
+      category: "tech",
       type: "PHYSICAL",
       winnerCount: 3,
       entryFee: 200,
@@ -87,6 +89,7 @@ export const currentGiveawayData = {
       value: "₹24,900",
       image: "/assets/airpod.png",
       color: "green",
+      category: "tech",
       type: "PHYSICAL",
       winnerCount: 5,
       entryFee: 500,
@@ -117,6 +120,7 @@ export const currentGiveawayData = {
       value: "₹2,000",
       image: "/assets/amazon card.png",
       color: "orange",
+      category: "vouchers",
       type: "GIFT_CARD",
       winnerCount: 10,
       entryFee: 500,
@@ -146,6 +150,7 @@ export const currentGiveawayData = {
       value: "₹500",
       image: "/assets/amazon card 2.png",
       color: "orange",
+      category: "vouchers",
       type: "GIFT_CARD",
       winnerCount: 15,
       entryFee: 300,
@@ -173,6 +178,7 @@ export const currentGiveawayData = {
       value: "₹20",
       image: "/assets/amazon card 3.png",
       color: "purple",
+      category: "tokens",
       type: "GIFT_CARD",
       winnerCount: 50,
       entryFee: 2000,
@@ -189,6 +195,177 @@ export const currentGiveawayData = {
       claimDetails: {
         type: "GIFT_CARD",
         instructions: "Auto-credited via email within 48 hours."
+      }
+    },
+    {
+      id: "PRIZE-007",
+      slug: "ps5-slim-console",
+      position: "GAMING JACKPOT",
+      name: "PlayStation 5 Slim",
+      spec: "1TB SSD Next-Gen Console",
+      value: "₹44,990",
+      image: "/assets/gift box 1.png",
+      color: "blue",
+      category: "tech",
+      type: "PHYSICAL",
+      winnerCount: 2,
+      entryFee: 400,
+      currency: "VEs",
+      participants: "2.1K+",
+      daysLeft: 11,
+      shortDesc: "Experience lightning-fast loading with an ultra-high speed SSD, deeper immersion with haptic feedback, and 3D Audio.",
+      about: "The PlayStation 5 Slim console delivers next-generation gaming performance in a sleek, compact design. Includes DualSense wireless controller with dynamic adaptive triggers and integrated microphone.",
+      highlights: [
+        "1TB ultra-high speed internal SSD storage",
+        "4K 120Hz display output with HDR support",
+        "Tempest 3D AudioTech immersion engine",
+        "DualSense wireless controller included",
+        "1-year official Sony India warranty"
+      ],
+      claimDetails: {
+        type: "PHYSICAL",
+        instructions: "Requires complete postal address and phone number for insured courier shipping."
+      }
+    },
+    {
+      id: "PRIZE-008",
+      slug: "amazon-5000",
+      position: "MEGA VOUCHER",
+      name: "Amazon Pay ₹5,000",
+      spec: "₹5,000 Direct Balance Top-Up",
+      value: "₹5,000",
+      image: "/assets/amazon card.png",
+      color: "orange",
+      category: "vouchers",
+      type: "GIFT_CARD",
+      winnerCount: 5,
+      entryFee: 350,
+      currency: "VEs",
+      participants: "1.9K+",
+      daysLeft: 8,
+      shortDesc: "High-value digital Amazon Pay voucher credited directly to your Amazon account for shopping, travel, and recharges.",
+      about: "Instant ₹5,000 Amazon Pay Gift Card applicable across all categories on Amazon India. Redeemable for electronics, fashion, bill payments, and flight/hotel bookings.",
+      highlights: [
+        "16-digit voucher code delivered directly to your email",
+        "Valid for 365 days across all Amazon India services",
+        "Can be merged with existing Amazon Pay wallet balance",
+        "Zero convenience charges or transaction deductions"
+      ],
+      claimDetails: {
+        type: "GIFT_CARD",
+        instructions: "100% digital code delivered to winner's registered email address."
+      }
+    },
+    {
+      id: "PRIZE-009",
+      slug: "flipkart-1000",
+      position: "SHOPPING SPREE",
+      name: "Flipkart ₹1,000 Gift Card",
+      spec: "₹1,000 Instant E-Gift Voucher",
+      value: "₹1,000",
+      image: "/assets/giveaway card.png",
+      color: "purple",
+      category: "vouchers",
+      type: "GIFT_CARD",
+      winnerCount: 20,
+      entryFee: 150,
+      currency: "VEs",
+      participants: "3.4K+",
+      daysLeft: 6,
+      shortDesc: "Shop top fashion, electronics, and daily essentials across Flipkart India with instant digital credit.",
+      about: "Enjoy shopping on Flipkart with a ₹1,000 digital voucher. Seamlessly stacks with Flipkart SuperCoins, sale events, and bank promotions.",
+      highlights: [
+        "Valid across all products and categories on Flipkart",
+        "Stacks with ongoing festival discounts and promo codes",
+        "Delivered directly to inbox with PIN protection"
+      ],
+      claimDetails: {
+        type: "GIFT_CARD",
+        instructions: "Digital e-card code delivered to verified email address."
+      }
+    },
+    {
+      id: "PRIZE-010",
+      slug: "google-play-500",
+      position: "GAMER SPECIAL",
+      name: "Google Play ₹500 Code",
+      spec: "₹500 Play Store Redeem Code",
+      value: "₹500",
+      image: "/assets/giveaway card.png",
+      color: "green",
+      category: "vouchers",
+      type: "GIFT_CARD",
+      winnerCount: 25,
+      entryFee: 250,
+      currency: "SVEs",
+      participants: "2.7K+",
+      daysLeft: 4,
+      shortDesc: "Top up your Google Play balance for mobile games, BGMI UC, Free Fire Diamonds, premium apps, and books.",
+      about: "Redeem directly inside Google Play Store on Android to unlock premium games, in-game subscriptions, diamond packs, movies, and cloud services.",
+      highlights: [
+        "Instant code redemption directly inside Google Play Store",
+        "Works for all Android games, in-app purchases, and apps",
+        "Official certified Google Play digital redemption voucher"
+      ],
+      claimDetails: {
+        type: "GIFT_CARD",
+        instructions: "Instant email delivery with 1-click redemption instructions."
+      }
+    },
+    {
+      id: "PRIZE-011",
+      slug: "upi-cash-100",
+      position: "INSTANT CASH",
+      name: "₹100 Instant UPI Cash",
+      spec: "Direct UPI Bank Transfer ₹100",
+      value: "₹100",
+      image: "/assets/giveaway card.png",
+      color: "green",
+      category: "instant",
+      type: "GIFT_CARD",
+      winnerCount: 50,
+      entryFee: 100,
+      currency: "VEs",
+      participants: "5.6K+",
+      daysLeft: 2,
+      shortDesc: "Instant direct bank transfer to any UPI ID (PhonePe, Google Pay, Paytm, BHIM) with zero processing fees.",
+      about: "India-first real cash reward! Win and receive ₹100 transferred directly to your bank account via instant National Payments Corporation of India (NPCI) UPI rails.",
+      highlights: [
+        "Direct UPI transfer to any active Indian bank account",
+        "Zero conversion fee – full ₹100 credited in minutes",
+        "Supports PhonePe, GPay, Paytm, BHIM, and bank UPIs"
+      ],
+      claimDetails: {
+        type: "GIFT_CARD",
+        instructions: "Requires only your verified UPI ID (e.g., username@upi). Zero address needed."
+      }
+    },
+    {
+      id: "PRIZE-012",
+      slug: "token-jackpot-100",
+      position: "TOKEN SPECIAL",
+      name: "Token Mega Voucher ₹100",
+      spec: "₹100 Community Cash Voucher",
+      value: "₹100",
+      image: "/assets/amazon card 3.png",
+      color: "purple",
+      category: "tokens",
+      type: "GIFT_CARD",
+      winnerCount: 100,
+      entryFee: 3500,
+      currency: "Tokens",
+      participants: "6.8K+",
+      daysLeft: 2,
+      shortDesc: "Convert your earned community engagement Tokens into real spending rewards with zero VEs or SVEs needed.",
+      about: "Designed specifically for daily active users who complete microtasks, streak check-ins, and opinion polls to redeem accumulated community Tokens into real spending power.",
+      highlights: [
+        "Pay 100% using community engagement Tokens",
+        "Huge winner pool: 100 verified winners selected per round",
+        "Instant delivery via Amazon Pay or UPI cash"
+      ],
+      claimDetails: {
+        type: "GIFT_CARD",
+        instructions: "Delivered via registered email within 24 hours of draw completion."
       }
     }
   ]

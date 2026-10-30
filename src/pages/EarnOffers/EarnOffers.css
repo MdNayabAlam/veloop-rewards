@@ -209,7 +209,7 @@
 /* Task Cards Grid */
 .task-cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
   gap: 20px;
 }
 
@@ -644,7 +644,7 @@
 /* Dispute Tickets Grid */
 .tickets-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
   gap: 16px;
 }
 

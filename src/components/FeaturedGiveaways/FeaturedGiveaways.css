@@ -316,14 +316,50 @@
   margin-top: 30px;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
+  .giveaway-cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 900px) {
   .giveaway-cards-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
   }
 }
 
 @media (max-width: 640px) {
+  .featured-giveaways-section {
+    padding: 30px 12px 20px;
+  }
   .giveaway-cards-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .reward-card {
+    padding: 12px 10px;
+    border-radius: 12px;
+  }
+  .prize-visual-box {
+    height: 100px;
+  }
+  .prize-product-img {
+    max-height: 80px;
+  }
+  .prize-card-title {
+    font-size: 0.85rem;
+  }
+  .prize-card-spec {
+    font-size: 0.72rem;
+  }
+  .prize-meta-row {
+    font-size: 0.68rem;
+    gap: 6px;
+  }
+  .card-action-btn {
+    padding: 8px 10px;
+    font-size: 0.76rem;
   }
 }

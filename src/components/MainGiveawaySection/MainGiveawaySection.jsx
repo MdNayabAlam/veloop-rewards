@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useGiveaway } from "../../context/GiveawayContext";
 import { currentGiveawayData } from "../../data/giveawayData";
 import {
@@ -11,7 +11,10 @@ import {
   CheckSquare,
   Gift,
   Trophy,
-  Star
+  Star,
+  Sparkles,
+  Zap,
+  Layers
 } from "lucide-react";
 import "./MainGiveawaySection.css";
 
@@ -26,8 +29,22 @@ export default function MainGiveawaySection() {
     currentUser
   } = useGiveaway();
 
-  // Take the primary 4 featured prizes matching Ref_02.jpeg
-  const featuredPrizes = currentGiveawayData.prizes.slice(0, 4);
+  const [activeCategory, setActiveCategory] = useState("ALL");
+  const [showAllCards, setShowAllCards] = useState(true);
+
+  // All 12 prizes
+  const allPrizes = currentGiveawayData.prizes;
+
+  // Filter based on active category
+  const filteredPrizes = allPrizes.filter((prize) => {
+    if (activeCategory === "ALL") return true;
+    if (activeCategory === "tech") return prize.category === "tech";
+    if (activeCategory === "vouchers") return prize.category === "vouchers";
+    if (activeCategory === "instant") return prize.category === "instant" || prize.category === "tokens";
+    return true;
+  });
+
+  const displayedPrizes = showAllCards ? filteredPrizes : filteredPrizes.slice(0, 4);
 
   const handleJoinClick = (e, prize) => {
     e.stopPropagation();
@@ -37,6 +54,13 @@ export default function MainGiveawaySection() {
     }
     setConfirmPrize(prize);
   };
+
+  const categories = [
+    { id: "ALL", label: "All Giveaways", count: allPrizes.length, icon: <Layers size={14} /> },
+    { id: "tech", label: "Tech & Gadgets", count: allPrizes.filter(p => p.category === "tech").length, icon: <Sparkles size={14} /> },
+    { id: "vouchers", label: "Gift Cards", count: allPrizes.filter(p => p.category === "vouchers").length, icon: <Gift size={14} /> },
+    { id: "instant", label: "UPI & Tokens", count: allPrizes.filter(p => p.category === "instant" || p.category === "tokens").length, icon: <Zap size={14} /> }
+  ];
 
   const steps = [
     {
@@ -74,7 +98,7 @@ export default function MainGiveawaySection() {
       <div className="section-container">
         <div className="split-layout-grid">
           {/* ======================================================== */}
-          {/* LEFT COLUMN: Featured Giveaways (4 Cards matching Ref_02) */}
+          {/* LEFT COLUMN: Featured Giveaways Cards Grid               */}
           {/* ======================================================== */}
           <div className="giveaways-left-col">
             <div className="col-header-bar">
@@ -82,27 +106,48 @@ export default function MainGiveawaySection() {
                 <h2 className="featured-section-title">
                   <Star size={20} className="star-gold-icon" />
                   <span>Featured Giveaways</span>
+                  <span className="giveaways-count-badge">{displayedPrizes.length} Active</span>
                 </h2>
                 <p className="featured-section-subtitle">
-                  Participate in our handpicked giveaways and win exciting rewards.
+                  Participate in our certified giveaways, complete simple tasks and win amazing rewards.
                 </p>
               </div>
 
               <button
                 className="view-all-giveaways-btn"
                 onClick={() => {
-                  const el = document.getElementById("featured-giveaways");
-                  if (el) el.scrollIntoView({ behavior: "smooth" });
+                  if (activeCategory !== "ALL") setActiveCategory("ALL");
+                  setShowAllCards(!showAllCards);
                 }}
               >
-                <span>View All Giveaways</span>
+                <span>{showAllCards ? "Show Top 4" : `View All (${allPrizes.length})`}</span>
                 <ArrowRight size={14} />
               </button>
             </div>
 
-            {/* 4 Cards Grid */}
-            <div className="four-cards-row-grid">
-              {featuredPrizes.map((prize) => {
+            {/* Filter Category Tabs */}
+            <div className="giveaways-cat-tabs-row" role="tablist" aria-label="Giveaway Categories">
+              {categories.map((cat) => (
+                <button
+                  key={cat.id}
+                  className={`cat-tab-btn ${activeCategory === cat.id ? "active" : ""}`}
+                  onClick={() => {
+                    setActiveCategory(cat.id);
+                    setShowAllCards(true);
+                  }}
+                  role="tab"
+                  aria-selected={activeCategory === cat.id}
+                >
+                  {cat.icon}
+                  <span>{cat.label}</span>
+                  <span className="cat-count-pill">{cat.count}</span>
+                </button>
+              ))}
+            </div>
+
+            {/* Responsive Cards Grid: Desktop 3-4 cards/row, Tablet 2-3 cards/row, Mobile 2 cards/row */}
+            <div className="giveaways-cards-responsive-grid">
+              {displayedPrizes.map((prize) => {
                 const isJoined = joinedPrizes.has(prize.id);
 
                 return (
@@ -111,10 +156,14 @@ export default function MainGiveawaySection() {
                     className={`exact-prize-card ${prize.color} ${isJoined ? "is-joined" : ""}`}
                     onClick={() => navigateToGiveaway(prize.slug)}
                   >
-                    {/* Top Prize Position Badge */}
+                    {/* Top Prize Position & Fee Badge */}
                     <div className="card-top-tag-wrap">
                       <span className={`prize-pos-tag ${prize.color}`}>
                         {prize.position}
+                      </span>
+                      <span className="prize-entry-fee-tag" title={`Entry Fee: ${prize.entryFee} ${prize.currency}`}>
+                        <Zap size={10} />
+                        <span>{prize.entryFee} {prize.currency}</span>
                       </span>
                     </div>
 
@@ -131,22 +180,21 @@ export default function MainGiveawaySection() {
 
                     {/* Content */}
                     <div className="card-info-content">
-                      <h3 className="exact-prize-title">{prize.name}</h3>
-                      <p className="exact-prize-spec">{prize.spec}</p>
+                      <div className="title-value-row">
+                        <h3 className="exact-prize-title" title={prize.name}>{prize.name}</h3>
+                        <span className="prize-inr-value">{prize.value}</span>
+                      </div>
+                      <p className="exact-prize-spec" title={prize.spec}>{prize.spec}</p>
 
                       <div className="exact-meta-bar">
                         <div className="meta-cell">
-                          <Users size={12} className="meta-icon" />
-                          <span>{prize.participants} Participants</span>
+                          <Users size={11} className="meta-icon" />
+                          <span>{prize.participants}</span>
                         </div>
                         <div className="meta-cell">
-                          <Clock size={12} className="meta-icon" />
+                          <Clock size={11} className="meta-icon" />
                           <span>
-                            {prize.slug === "iphone-15-pro" && "12d : 08h : 45m left"}
-                            {prize.slug === "apple-watch-series-9" && "9d : 06h : 30m left"}
-                            {prize.slug === "airpods-pro-2" && "7d : 08h : 20m left"}
-                            {prize.slug === "amazon-2000" && "5d : 02h : 15m left"}
-                            {!["iphone-15-pro", "apple-watch-series-9", "airpods-pro-2", "amazon-2000"].includes(prize.slug) && `${prize.daysLeft}d left`}
+                            {prize.daysLeft ? `${prize.daysLeft}d left` : "Ending soon"}
                           </span>
                         </div>
                       </div>
@@ -158,18 +206,18 @@ export default function MainGiveawaySection() {
                       >
                         {isJoined ? (
                           <>
-                            <CheckCircle2 size={15} />
+                            <CheckCircle2 size={13} />
                             <span>Participating</span>
                           </>
                         ) : giveawayStatus === "ENDED" ? (
                           <>
                             <span>Draw Result</span>
-                            <ArrowRight size={14} />
+                            <ArrowRight size={13} />
                           </>
                         ) : (
                           <>
                             <span>Join Now</span>
-                            <ArrowRight size={14} />
+                            <ArrowRight size={13} />
                           </>
                         )}
                       </button>

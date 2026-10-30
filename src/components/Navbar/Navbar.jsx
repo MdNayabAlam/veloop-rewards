@@ -1,9 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useGiveaway } from "../../context/GiveawayContext";
 import BrandLogo from "../BrandLogo/BrandLogo";
 import {
-  Coins,
-  Sparkles,
   User,
   LogIn,
   ChevronRight,
@@ -13,7 +11,9 @@ import {
   ShieldCheck,
   Flame,
   FileText,
-  Briefcase
+  Briefcase,
+  Menu,
+  X
 } from "lucide-react";
 import "./Navbar.css";
 
@@ -31,14 +31,20 @@ export default function Navbar() {
     notifications
   } = useGiveaway();
 
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const unreadCount = notifications.filter((n) => !n.isRead).length;
+
+  const handleMobileNav = (route) => {
+    navigateToRoute(route);
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <header className="veloop-navbar">
       <div className="navbar-inner">
         <BrandLogo onClick={navigateToHome} size="md" />
 
-        {/* Global Primary Navigation Links */}
+        {/* Global Primary Navigation Links for Desktop */}
         <nav className="navbar-nav-links">
           <button
             className={`nav-link-btn ${currentRoute === "giveaways" ? "active" : ""}`}
@@ -76,6 +82,7 @@ export default function Navbar() {
             className={`nav-link-btn ${currentRoute === "referrals" ? "active" : ""}`}
             onClick={() => navigateToRoute("referrals")}
           >
+            <Gift size={15} />
             <span>Refer & Earn</span>
           </button>
 
@@ -152,8 +159,140 @@ export default function Navbar() {
               <ChevronRight size={14} />
             </button>
           )}
+
+          {/* Mobile Hamburger Toggle Button */}
+          <button
+            className="mobile-hamburger-btn"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label={isMobileMenuOpen ? "Close navigation" : "Open navigation"}
+          >
+            {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
         </div>
       </div>
+
+      {/* Mobile Drawer Navigation Menu */}
+      {isMobileMenuOpen && (
+        <div className="mobile-nav-drawer" role="dialog" aria-modal="true">
+          <div className="mobile-drawer-backdrop" onClick={() => setIsMobileMenuOpen(false)} />
+          <div className="mobile-drawer-content">
+            <div className="mobile-drawer-header">
+              <BrandLogo size="sm" onClick={() => handleMobileNav("giveaways")} />
+              <button
+                className="close-drawer-btn"
+                onClick={() => setIsMobileMenuOpen(false)}
+                aria-label="Close navigation"
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            {/* Quick Balances Row in Drawer */}
+            <div className="mobile-drawer-wallet-box" onClick={() => handleMobileNav("wallet")}>
+              <div className="m-wallet-item">
+                <span className="currency-dot purple" />
+                <span>VEs: <strong>{balances.VEs.toLocaleString()}</strong></span>
+              </div>
+              <div className="m-wallet-item">
+                <span className="currency-dot green" />
+                <span>SVEs: <strong>{balances.SVEs.toLocaleString()}</strong></span>
+              </div>
+              <div className="m-wallet-item">
+                <span className="currency-dot orange" />
+                <span>Tokens: <strong>{balances.Tokens.toLocaleString()}</strong></span>
+              </div>
+            </div>
+
+            <nav className="mobile-drawer-links">
+              <button
+                className={`m-nav-btn ${currentRoute === "giveaways" ? "active" : ""}`}
+                onClick={() => handleMobileNav("giveaways")}
+              >
+                <Gift size={18} />
+                <span>🎁 Giveaways</span>
+                <ChevronRight size={15} className="m-arrow" />
+              </button>
+
+              <button
+                className={`m-nav-btn ${currentRoute === "earn" ? "active" : ""}`}
+                onClick={() => handleMobileNav("earn")}
+              >
+                <Briefcase size={18} />
+                <span>💼 Earn Tasks & Surveys</span>
+                <ChevronRight size={15} className="m-arrow" />
+              </button>
+
+              <button
+                className={`m-nav-btn ${currentRoute === "daily" ? "active" : ""}`}
+                onClick={() => handleMobileNav("daily")}
+              >
+                <Flame size={18} />
+                <span>🔥 Daily Streaks & Lucky Spin</span>
+                <ChevronRight size={15} className="m-arrow" />
+              </button>
+
+              <button
+                className={`m-nav-btn ${currentRoute === "wallet" ? "active" : ""}`}
+                onClick={() => handleMobileNav("wallet")}
+              >
+                <Wallet size={18} />
+                <span>💳 Wallet & Instant Payouts</span>
+                <ChevronRight size={15} className="m-arrow" />
+              </button>
+
+              <button
+                className={`m-nav-btn ${currentRoute === "referrals" ? "active" : ""}`}
+                onClick={() => handleMobileNav("referrals")}
+              >
+                <Gift size={18} />
+                <span>👥 Refer & Earn (10% Lifetime)</span>
+                <ChevronRight size={15} className="m-arrow" />
+              </button>
+
+              <button
+                className={`m-nav-btn ${currentRoute === "trust" ? "active" : ""}`}
+                onClick={() => handleMobileNav("trust")}
+              >
+                <ShieldCheck size={18} />
+                <span>🛡️ Trust & Partner Networks</span>
+                <ChevronRight size={15} className="m-arrow" />
+              </button>
+
+              <button
+                className={`m-nav-btn report ${currentRoute === "research-report" ? "active" : ""}`}
+                onClick={() => handleMobileNav("research-report")}
+              >
+                <FileText size={18} />
+                <span>📄 Research Assignment Report</span>
+                <ChevronRight size={15} className="m-arrow" />
+              </button>
+            </nav>
+
+            <div className="mobile-drawer-footer">
+              <button
+                className="m-redeem-code-btn"
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  setIsGiveawayCodeModalOpen(true);
+                }}
+              >
+                <Gift size={16} />
+                <span>Redeem Giveaway Code</span>
+              </button>
+              <button
+                className="m-rules-btn"
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  setIsRulesModalOpen(true);
+                }}
+              >
+                <ShieldCheck size={16} />
+                <span>Official Rules & Transparency</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 }

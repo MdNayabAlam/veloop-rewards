@@ -1,6 +1,6 @@
 import React from "react";
 import { winnerTickerMessages } from "../../data/giveawayData";
-import { Sparkles, Trophy } from "lucide-react";
+import { Trophy } from "lucide-react";
 import "./WinnerSlider.css";
 
 export default function WinnerSlider() {

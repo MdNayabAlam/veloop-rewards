@@ -82,13 +82,23 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 640px) {
+  .veloop-trust-section {
+    padding: 24px 12px 36px;
+  }
   .trust-grid {
     grid-template-columns: 1fr;
-    padding: 18px;
+    padding: 16px 14px;
+    border-radius: 16px;
   }
   .trust-card:not(:last-child) {
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    padding-bottom: 16px;
+    padding-bottom: 14px;
+  }
+  .trust-title {
+    font-size: 13px;
+  }
+  .trust-desc {
+    font-size: 11px;
   }
 }

@@ -441,3 +441,48 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 640px) {
+  .veloop-winners-section {
+    padding: 36px 12px;
+  }
+  .winners-tab-switcher {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    padding: 4px;
+  }
+  .tab-btn {
+    padding: 7px 10px;
+    font-size: 11px;
+    flex: 1;
+    justify-content: center;
+    gap: 4px;
+  }
+  .live-giveaway-notice-card {
+    padding: 20px 14px;
+  }
+  .notice-content h3 {
+    font-size: 17px;
+  }
+  .notice-content p {
+    font-size: 12px;
+  }
+  .prev-winner-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 10px 12px;
+  }
+  .col-user {
+    min-width: 0;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .col-prize {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+}

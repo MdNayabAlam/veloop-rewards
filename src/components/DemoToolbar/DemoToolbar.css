@@ -279,7 +279,33 @@
 }
 
 @media (max-width: 640px) {
+  .demo-floating-launcher-btn {
+    bottom: 14px;
+    right: 14px;
+    padding: 7px 12px;
+    font-size: 0.72rem;
+    gap: 6px;
+  }
+  .demo-floating-modal-overlay {
+    padding: 10px;
+    align-items: flex-end;
+  }
   .demo-floating-panel {
     max-width: 100%;
+    max-height: 88vh;
+    border-radius: 16px;
+  }
+  .demo-panel-header {
+    padding: 12px 14px;
+  }
+  .demo-panel-content {
+    padding: 12px 14px;
+    gap: 16px;
+  }
+  .persona-selector-grid,
+  .status-switcher-grid,
+  .quick-actions-grid {
+    grid-template-columns: 1fr;
+    gap: 6px;
   }
 }

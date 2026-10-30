@@ -159,26 +159,118 @@
 @media (max-width: 1024px) {
   .stats-grid-container {
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    gap: 16px;
+    padding: 20px;
   }
-  .stat-card:nth-child(2) {
-    border-right: 0;
+  .stat-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 14px;
+    padding: 14px 16px;
   }
   .stat-card:not(:last-child) {
     border-right: 0;
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 640px) {
+  .veloop-stats-section {
+    padding: 0 12px;
+    margin-bottom: 20px;
+  }
   .stats-grid-container {
-    grid-template-columns: 1fr;
-    padding: 16px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 12px;
+    border-radius: 16px;
+    background: rgba(14, 10, 28, 0.9);
   }
   .stat-card {
-    padding: 6px 0;
+    padding: 10px 8px;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(168, 85, 247, 0.18);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    border-right: none !important;
+    border-bottom: none !important;
   }
   .stat-card:not(:last-child) {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    padding-bottom: 14px;
+    border-bottom: none !important;
+    padding-bottom: 10px;
+  }
+  .stat-icon-box {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    flex-shrink: 0;
+  }
+  .stat-icon-box svg {
+    width: 18px;
+    height: 18px;
+  }
+  .stat-info {
+    min-width: 0;
+    flex: 1;
+    gap: 2px;
+  }
+  .stat-subtext {
+    font-size: 10px;
+    letter-spacing: 0.2px;
+    color: #94a3b8;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.2;
+  }
+  .stat-number-wrap {
+    gap: 4px;
+    align-items: baseline;
+    flex-wrap: wrap;
+  }
+  .stat-value {
+    font-size: 17px;
+    font-weight: 900;
+    line-height: 1.1;
+  }
+  .stat-value.timer-text {
+    font-size: 11px;
+    font-weight: 800;
+  }
+  .stat-pill-label {
+    font-size: 9px;
+    font-weight: 800;
+    padding: 1px 4px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.05);
+  }
+}
+
+@media (max-width: 380px) {
+  .stats-grid-container {
+    gap: 8px;
+    padding: 8px;
+  }
+  .stat-card {
+    padding: 8px 6px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  .stat-icon-box {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+  }
+  .stat-icon-box svg {
+    width: 15px;
+    height: 15px;
+  }
+  .stat-subtext {
+    font-size: 9px;
+  }
+  .stat-value {
+    font-size: 15px;
   }
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import { useGiveaway } from "../../context/GiveawayContext";
-import { CheckCircle2, AlertCircle, Info, Sparkles } from "lucide-react";
+import { CheckCircle2, AlertCircle, Info } from "lucide-react";
 import "./Toast.css";
 
 export default function Toast() {

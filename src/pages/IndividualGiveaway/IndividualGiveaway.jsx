@@ -12,9 +12,7 @@ import {
   AlertTriangle,
   ChevronDown,
   ChevronUp,
-  Gift,
-  HelpCircle,
-  ExternalLink
+  HelpCircle
 } from "lucide-react";
 import "./IndividualGiveaway.css";
 
@@ -28,8 +26,7 @@ export default function IndividualGiveaway() {
     balances,
     joinedPrizes,
     setConfirmPrize,
-    setIsLoginModalOpen,
-    setIsRulesModalOpen
+    setIsLoginModalOpen
   } = useGiveaway();
 
   const [openTerms, setOpenTerms] = useState(false);

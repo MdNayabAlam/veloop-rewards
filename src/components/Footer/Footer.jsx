@@ -1,7 +1,7 @@
 import React from "react";
 import { useGiveaway } from "../../context/GiveawayContext";
 import BrandLogo from "../BrandLogo/BrandLogo";
-import { ShieldCheck, Mail, FileText, CheckCircle2 } from "lucide-react";
+import { ShieldCheck, Mail } from "lucide-react";
 import "./Footer.css";
 
 export default function Footer() {

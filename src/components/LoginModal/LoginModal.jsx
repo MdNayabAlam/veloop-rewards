@@ -5,6 +5,7 @@ import "./LoginModal.css";
 
 export default function LoginModal() {
   const { isLoginModalOpen, setIsLoginModalOpen, setUserRole, showToast } = useGiveaway();
+  const [customName, setCustomName] = React.useState("");
 
   if (!isLoginModalOpen) return null;
 
@@ -13,8 +14,6 @@ export default function LoginModal() {
     setIsLoginModalOpen(false);
     showToast(`✓ Logged in as ${role === "participant" ? "Rahul (Participant)" : "Alex (Winner)"}`, "success");
   };
-
-  const [customName, setCustomName] = React.useState("");
 
   const handleCustomLogin = (e) => {
     e.preventDefault();

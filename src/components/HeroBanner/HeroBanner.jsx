@@ -11,18 +11,6 @@ export default function HeroBanner() {
       <div className="hero-radial-glow top-left" />
       <div className="hero-radial-glow bottom-right" />
 
-      {/* Top Left Giveaway Code Button from Ref_01.jpeg */}
-      <div className="hero-corner-code-wrap">
-        <button
-          className="hero-giveaway-code-btn"
-          onClick={() => setIsGiveawayCodeModalOpen(true)}
-          title="Enter special giveaway code from Ref_01"
-        >
-          <Gift size={15} />
-          <span>Giveaway Code</span>
-        </button>
-      </div>
-
       {/* Decorative 3D floating gift boxes with glowing pedestals from Ref_02.jpeg */}
       <div className="floating-hero-box left-box">
         <div className="pedestal-podium-wrap">
@@ -59,10 +47,21 @@ export default function HeroBanner() {
       </div>
 
       <div className="hero-banner-content">
-        {/* EXCLUSIVE GIVEAWAYS Pill matching Ref_02.jpeg */}
-        <div className="hero-badge-wrap">
-          <Gift size={14} className="hero-badge-gift-icon" />
-          <span className="hero-badge-text">EXCLUSIVE GIVEAWAYS</span>
+        {/* Top Badges Row: EXCLUSIVE GIVEAWAYS Pill + Giveaway Code Button shifted side-by-side */}
+        <div className="hero-top-badges-row">
+          <div className="hero-badge-wrap">
+            <Gift size={14} className="hero-badge-gift-icon" />
+            <span className="hero-badge-text">EXCLUSIVE GIVEAWAYS</span>
+          </div>
+
+          <button
+            className="hero-giveaway-code-btn"
+            onClick={() => setIsGiveawayCodeModalOpen(true)}
+            title="Redeem Promo / Giveaway Code"
+          >
+            <Gift size={14} />
+            <span>Giveaway Code</span>
+          </button>
         </div>
 
         {/* Exact Title from Ref_02.jpeg: Giveaway Section */}

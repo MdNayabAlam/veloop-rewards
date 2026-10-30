@@ -12,6 +12,8 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 body {
@@ -21,10 +23,15 @@ body {
   background-color: #070611;
   color: #f8fafc;
   overflow-x: hidden;
+  max-width: 100%;
 }
 
 * {
   box-sizing: border-box;
+}
+
+img, svg, video, canvas, audio, iframe, embed, object {
+  max-width: 100%;
 }
 
 button, input, textarea, select {

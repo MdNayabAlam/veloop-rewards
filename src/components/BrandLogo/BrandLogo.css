@@ -360,19 +360,38 @@
    ========================================================================== */
 @media (max-width: 600px) {
   .veloop-brand-logo.size-md {
-    gap: 9px;
-    padding: 3px 5px;
+    gap: 8px;
+    padding: 3px 4px;
   }
   .veloop-brand-logo.size-md .vr-emblem-container {
-    width: 38px;
-    height: 33px;
+    width: 36px;
+    height: 31px;
   }
   .veloop-brand-logo.size-md .brand-headline-text {
-    font-size: 16px;
-    letter-spacing: 1.8px;
+    font-size: 15px;
+    letter-spacing: 1.6px;
   }
   .veloop-brand-logo.size-md .brand-tagline-text {
-    font-size: 8.5px;
-    letter-spacing: 2.5px;
+    font-size: 8px;
+    letter-spacing: 2px;
+  }
+}
+
+@media (max-width: 380px) {
+  .veloop-brand-logo.size-md {
+    gap: 6px;
+    padding: 2px 2px;
+  }
+  .veloop-brand-logo.size-md .vr-emblem-container {
+    width: 30px;
+    height: 26px;
+  }
+  .veloop-brand-logo.size-md .brand-headline-text {
+    font-size: 13px;
+    letter-spacing: 1.2px;
+  }
+  .veloop-brand-logo.size-md .brand-tagline-text {
+    font-size: 7px;
+    letter-spacing: 1.5px;
   }
 }
