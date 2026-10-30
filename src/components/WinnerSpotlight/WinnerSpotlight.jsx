@@ -6,12 +6,22 @@ import "./WinnerSpotlight.css";
 export default function WinnerSpotlight() {
   const { currentUser, claimStatus, setIsClaimModalOpen } = useGiveaway();
 
-  if (!currentUser.wonPrize) return null;
+  // Certified Winner Spotlight Banner (Always visible with fallback to Apple Watch Series 9)
+  const defaultPrize = {
+    prizeId: "PRIZE-002",
+    prizeName: "Apple Watch Series 9",
+    prizePosition: "2ND PRIZE",
+    image: "/assets/watch.png",
+    value: "₹41,900",
+    type: "PHYSICAL",
+    deadline: "7 Days Remaining"
+  };
 
-  const prize = currentUser.wonPrize;
+  const prize = currentUser?.wonPrize || defaultPrize;
+  const currentClaimStatus = claimStatus || "NOT_SUBMITTED";
 
   return (
-    <div className="winner-spotlight-banner">
+    <div className="winner-spotlight-banner" id="winner-spotlight">
       <div className="spotlight-inner">
         <div className="spotlight-left">
           <div className="trophy-badge">
@@ -40,7 +50,7 @@ export default function WinnerSpotlight() {
         </div>
 
         <div className="spotlight-action-col">
-          {claimStatus === "NOT_SUBMITTED" && (
+          {currentClaimStatus === "NOT_SUBMITTED" && (
             <button className="claim-now-cta" onClick={() => setIsClaimModalOpen(true)}>
               <Gift size={16} />
               <span>Claim Your Prize</span>
@@ -48,7 +58,7 @@ export default function WinnerSpotlight() {
             </button>
           )}
 
-          {claimStatus === "SUBMITTED" && (
+          {currentClaimStatus === "SUBMITTED" && (
             <div className="claim-status-pill submitted">
               <CheckCircle2 size={16} />
               <div>
@@ -58,7 +68,7 @@ export default function WinnerSpotlight() {
             </div>
           )}
 
-          {claimStatus === "PROCESSING" && (
+          {currentClaimStatus === "PROCESSING" && (
             <div className="claim-status-pill processing">
               <Clock size={16} />
               <div>
@@ -68,7 +78,7 @@ export default function WinnerSpotlight() {
             </div>
           )}
 
-          {claimStatus === "COMPLETED" && (
+          {currentClaimStatus === "COMPLETED" && (
             <div className="claim-status-pill completed">
               <CheckCircle2 size={16} />
               <div>

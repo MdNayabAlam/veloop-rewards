@@ -6,7 +6,17 @@ import "./PrizeClaimModal.css";
 export default function PrizeClaimModal() {
   const { currentUser, isClaimModalOpen, setIsClaimModalOpen, handleSubmitClaim, isLoading } = useGiveaway();
 
-  const prize = currentUser.wonPrize;
+  const defaultPrize = {
+    prizeId: "PRIZE-002",
+    prizeName: "Apple Watch Series 9",
+    prizePosition: "2ND PRIZE",
+    image: "/assets/watch.png",
+    value: "₹41,900",
+    type: "PHYSICAL",
+    deadline: "7 Days Remaining"
+  };
+
+  const prize = currentUser?.wonPrize || defaultPrize;
 
   const [formData, setFormData] = useState({
     fullName: currentUser.name || "",
