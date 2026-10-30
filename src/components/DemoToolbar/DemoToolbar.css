@@ -280,11 +280,13 @@
 
 @media (max-width: 640px) {
   .demo-floating-launcher-btn {
-    bottom: 14px;
-    right: 14px;
-    padding: 7px 12px;
-    font-size: 0.72rem;
-    gap: 6px;
+    bottom: 12px;
+    right: 12px;
+    padding: 5px 10px;
+    font-size: 0.68rem;
+    gap: 5px;
+    opacity: 0.85;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
   }
   .demo-floating-modal-overlay {
     padding: 10px;

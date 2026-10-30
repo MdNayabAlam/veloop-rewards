@@ -57,5 +57,12 @@ a {
   width: 100%;
   margin: 0 auto;
   padding: 0 20px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 640px) {
+  .section-container {
+    padding: 0 10px;
+  }
 }
 

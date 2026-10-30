@@ -179,11 +179,13 @@
     margin-bottom: 20px;
   }
   .stats-grid-container {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 10px;
     padding: 12px;
     border-radius: 16px;
     background: rgba(14, 10, 28, 0.9);
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
   .stat-card {
     padding: 10px 8px;
@@ -195,6 +197,9 @@
     align-items: center;
     border-right: none !important;
     border-bottom: none !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
   }
   .stat-card:not(:last-child) {
     border-bottom: none !important;
