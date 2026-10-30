@@ -137,9 +137,10 @@ export default function MainGiveawaySection() {
                   }}
                   role="tab"
                   aria-selected={activeCategory === cat.id}
+                  title={cat.label}
                 >
                   {cat.icon}
-                  <span>{cat.label}</span>
+                  <span className="cat-label-text">{cat.label}</span>
                   <span className="cat-count-pill">{cat.count}</span>
                 </button>
               ))}

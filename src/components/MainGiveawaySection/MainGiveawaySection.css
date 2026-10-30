@@ -77,23 +77,17 @@
   align-items: center;
   gap: 8px;
   margin-bottom: 20px;
-  overflow-x: auto;
-  padding-bottom: 4px;
-  scrollbar-width: none;
-}
-
-.giveaways-cat-tabs-row::-webkit-scrollbar {
-  display: none;
+  flex-wrap: wrap;
 }
 
 .cat-tab-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
+  gap: 7px;
+  padding: 7px 14px;
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   color: #94a3b8;
   font-size: 0.78rem;
   font-weight: 700;
@@ -112,19 +106,20 @@
   background: linear-gradient(135deg, rgba(168, 85, 247, 0.35), rgba(99, 102, 241, 0.35));
   border-color: #a855f7;
   color: #fff;
-  box-shadow: 0 0 15px rgba(168, 85, 247, 0.25);
+  box-shadow: 0 0 16px rgba(168, 85, 247, 0.35);
 }
 
 .cat-count-pill {
   font-size: 0.68rem;
-  padding: 1px 6px;
+  font-weight: 800;
+  padding: 2px 7px;
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.1);
   color: #cbd5e1;
 }
 
 .cat-tab-btn.active .cat-count-pill {
-  background: rgba(168, 85, 247, 0.5);
+  background: #a855f7;
   color: #fff;
 }
 
@@ -612,14 +607,41 @@
     font-size: 0.72rem;
   }
   .giveaways-cat-tabs-row {
-    gap: 5px;
-    margin-bottom: 12px;
-    width: 100%;
-    min-width: 0;
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+    margin-bottom: 14px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    overflow-x: visible !important;
   }
   .cat-tab-btn {
-    padding: 4px 8px;
-    font-size: 0.7rem;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 8px 8px !important;
+    font-size: 0.72rem !important;
+    gap: 6px !important;
+    border-radius: 12px !important;
+    min-width: 0 !important;
+  }
+  .cat-tab-btn span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .cat-tab-btn svg {
+    flex-shrink: 0;
+    width: 13px !important;
+    height: 13px !important;
+  }
+  .cat-count-pill {
+    padding: 1px 6px !important;
+    font-size: 0.65rem !important;
+    border-radius: 8px !important;
+    flex-shrink: 0 !important;
   }
   /* Mobile: Exactly 2 cards per row, strictly constrained to 50% width */
   .giveaways-cards-responsive-grid,
@@ -745,6 +767,24 @@
 @media (max-width: 360px) {
   .giveaways-left-col {
     padding: 8px 6px;
+  }
+  .giveaways-cat-tabs-row {
+    gap: 6px !important;
+    margin-bottom: 10px !important;
+  }
+  .cat-tab-btn {
+    padding: 6px 4px !important;
+    font-size: 0.65rem !important;
+    gap: 4px !important;
+    border-radius: 10px !important;
+  }
+  .cat-tab-btn svg {
+    width: 11px !important;
+    height: 11px !important;
+  }
+  .cat-count-pill {
+    padding: 1px 4px !important;
+    font-size: 0.6rem !important;
   }
   .giveaways-cards-responsive-grid,
   .four-cards-row-grid {
