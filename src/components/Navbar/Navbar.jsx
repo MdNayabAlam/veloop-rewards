@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import { useGiveaway } from "../../context/GiveawayContext";
 import BrandLogo from "../BrandLogo/BrandLogo";
 import {
-  User,
-  LogIn,
-  ChevronRight,
   Gift,
   Bell,
   Wallet,
@@ -13,7 +10,9 @@ import {
   FileText,
   Briefcase,
   Menu,
-  X
+  X,
+  Search,
+  Sparkles
 } from "lucide-react";
 import "./Navbar.css";
 
@@ -32,6 +31,7 @@ export default function Navbar() {
   } = useGiveaway();
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const unreadCount = notifications.filter((n) => !n.isRead).length;
 
   const handleMobileNav = (route) => {
@@ -44,121 +44,93 @@ export default function Navbar() {
       <div className="navbar-inner">
         <BrandLogo onClick={navigateToHome} size="md" />
 
-        {/* Global Primary Navigation Links for Desktop */}
+        {/* Global Primary Navigation Links matching media_1793407830512_ba630f92.jpg */}
         <nav className="navbar-nav-links">
+          <button
+            className={`nav-link-btn ${currentRoute === "home" ? "active" : ""}`}
+            onClick={() => navigateToRoute("giveaways")}
+          >
+            <span>Home</span>
+          </button>
+
           <button
             className={`nav-link-btn ${currentRoute === "giveaways" ? "active" : ""}`}
             onClick={() => navigateToRoute("giveaways")}
           >
-            <Gift size={15} />
             <span>Giveaways</span>
           </button>
 
           <button
-            className={`nav-link-btn ${currentRoute === "earn" ? "active" : ""}`}
-            onClick={() => navigateToRoute("earn")}
-          >
-            <Briefcase size={15} />
-            <span>Earn Tasks</span>
-          </button>
-
-          <button
-            className={`nav-link-btn ${currentRoute === "daily" ? "active" : ""}`}
+            className={`nav-link-btn ${currentRoute === "daily" || currentRoute === "earn" ? "active" : ""}`}
             onClick={() => navigateToRoute("daily")}
           >
-            <Flame size={15} />
-            <span>Daily & Spin</span>
-          </button>
-
-          <button
-            className={`nav-link-btn ${currentRoute === "wallet" ? "active" : ""}`}
-            onClick={() => navigateToRoute("wallet")}
-          >
-            <Wallet size={15} />
-            <span>Wallet & Payouts</span>
-          </button>
-
-          <button
-            className={`nav-link-btn ${currentRoute === "referrals" ? "active" : ""}`}
-            onClick={() => navigateToRoute("referrals")}
-          >
-            <Gift size={15} />
-            <span>Refer & Earn</span>
+            <span>Rewards</span>
           </button>
 
           <button
             className={`nav-link-btn ${currentRoute === "trust" ? "active" : ""}`}
             onClick={() => navigateToRoute("trust")}
           >
-            <ShieldCheck size={15} />
-            <span>Trust & Partners</span>
+            <span>Leaderboard</span>
           </button>
 
           <button
-            className={`nav-link-btn report-pill-btn ${currentRoute === "research-report" ? "active" : ""}`}
-            onClick={() => navigateToRoute("research-report")}
+            className="nav-link-btn"
+            onClick={() => {
+              const el = document.getElementById("how-it-works-section");
+              if (el) el.scrollIntoView({ behavior: "smooth" });
+            }}
           >
-            <FileText size={15} />
-            <span>Research Report</span>
+            <span>How It Works</span>
           </button>
         </nav>
 
-        {/* Right Action Icons & Wallet */}
+        {/* Right Action Icons & Wallet matching media_1793407830512_ba630f92.jpg */}
         <div className="navbar-actions">
-          {/* Quick Redeem Code Button (from Ref_01.jpeg) */}
-          <button
-            className="redeem-code-nav-btn"
-            onClick={() => setIsGiveawayCodeModalOpen(true)}
-            title="Redeem Promo / Giveaway Code for instant VEs"
-          >
-            <Gift size={15} />
-            <span>Redeem Code</span>
-          </button>
+          {/* Search Bar Input */}
+          <div className="navbar-search-box hide-mobile-search">
+            <Search size={14} className="navbar-search-icon" />
+            <input
+              type="text"
+              placeholder="Search giveaways..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="navbar-search-input"
+            />
+          </div>
 
-          {/* Notifications Bell */}
+          {/* Quick Notifications Bell */}
           <button
             className="notif-bell-btn"
             onClick={() => setIsNotificationsOpen(true)}
             aria-label="View notifications"
           >
-            <Bell size={18} />
+            <Bell size={17} />
             {unreadCount > 0 && <span className="bell-badge-dot" />}
           </button>
 
-          {/* User Wallet Pill */}
-          {currentUser.isLoggedIn ? (
-            <div
-              className="user-wallet-pill"
-              onClick={() => navigateToRoute("wallet")}
-              title="Click to view detailed Wallet & Cashout"
-            >
-              <div className="wallet-stat" title="Velocity Entries balance">
-                <span className="currency-dot purple" />
-                <span className="stat-label">VEs:</span>
-                <strong>{balances.VEs.toLocaleString()}</strong>
-              </div>
-              <div className="wallet-stat" title="Super Velocity Entries balance">
-                <span className="currency-dot green" />
-                <span className="stat-label">SVEs:</span>
-                <strong>{balances.SVEs.toLocaleString()}</strong>
-              </div>
-              <div className="wallet-stat hide-mobile" title="Community Tokens balance">
-                <span className="currency-dot orange" />
-                <span className="stat-label">Tokens:</span>
-                <strong>{balances.Tokens.toLocaleString()}</strong>
-              </div>
-              <div className="user-avatar-tag" title={currentUser.name}>
-                <User size={13} />
-                <span>{currentUser.maskedId}</span>
-              </div>
-            </div>
-          ) : (
-            <button className="signin-btn" onClick={() => setIsLoginModalOpen(true)}>
-              <LogIn size={14} />
-              <span>Sign In</span>
-              <ChevronRight size={14} />
-            </button>
-          )}
+          {/* Single Diamond Balance Pill */}
+          <div
+            className="navbar-balance-pill"
+            onClick={() => navigateToRoute("wallet")}
+            title="Click to view detailed Wallet & Cashout"
+          >
+            <Sparkles size={13} className="balance-gem-icon" />
+            <span>{balances.VEs.toLocaleString()}</span>
+          </div>
+
+          {/* User Profile Avatar */}
+          <div
+            className="navbar-user-avatar-wrap"
+            onClick={() => setIsLoginModalOpen(true)}
+            title={currentUser.name || "User Account"}
+          >
+            <img
+              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80"
+              alt="User Profile"
+              className="navbar-user-avatar-img"
+            />
+          </div>
 
           {/* Mobile Hamburger Toggle Button */}
           <button

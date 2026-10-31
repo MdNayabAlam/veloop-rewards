@@ -70,7 +70,132 @@
 .navbar-actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
+}
+
+/* Navbar Search Box matching media_1793407830512_ba630f92.jpg */
+.navbar-search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 6px 14px;
+  transition: all 0.2s ease;
+}
+
+.navbar-search-box:focus-within {
+  border-color: rgba(168, 85, 247, 0.5);
+  background: rgba(168, 85, 247, 0.08);
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.25);
+}
+
+.navbar-search-icon {
+  color: #94a3b8;
+  flex-shrink: 0;
+}
+
+.navbar-search-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-size: 0.76rem;
+  width: 140px;
+}
+
+.navbar-search-input::placeholder {
+  color: #64748b;
+}
+
+@media (max-width: 990px) {
+  .hide-mobile-search {
+    display: none !important;
+  }
+}
+
+/* Notification Bell */
+.notif-bell-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #cbd5e1;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.notif-bell-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.bell-badge-dot {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ec4899;
+  box-shadow: 0 0 8px #ec4899;
+}
+
+/* Single Diamond Balance Pill matching reference */
+.navbar-balance-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(168, 85, 247, 0.15);
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  border-radius: 20px;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.navbar-balance-pill:hover {
+  background: rgba(168, 85, 247, 0.25);
+  border-color: #c084fc;
+}
+
+.balance-gem-icon {
+  color: #c084fc;
+}
+
+.navbar-balance-pill span {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+/* User Profile Avatar matching reference */
+.navbar-user-avatar-wrap {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid rgba(168, 85, 247, 0.4);
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.25);
+  transition: transform 0.2s ease;
+}
+
+.navbar-user-avatar-wrap:hover {
+  transform: scale(1.06);
+  border-color: #ec4899;
+}
+
+.navbar-user-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* Redeem Code Nav Button (Matching Ref_01.jpeg) */
@@ -94,38 +219,6 @@
   color: #fff;
   box-shadow: 0 0 16px rgba(168, 85, 247, 0.4);
   transform: translateY(-1px);
-}
-
-/* Notification Bell */
-.notif-bell-btn {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #cbd5e1;
-  width: 38px;
-  height: 38px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.notif-bell-btn:hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
-}
-
-.bell-badge-dot {
-  position: absolute;
-  top: 7px;
-  right: 7px;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #a855f7;
-  box-shadow: 0 0 8px #a855f7;
 }
 
 /* User Wallet Pill */
