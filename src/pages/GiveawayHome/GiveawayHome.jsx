@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useGiveaway } from "../../context/GiveawayContext";
 import { currentGiveawayData } from "../../data/giveawayData";
 import {
@@ -25,7 +25,13 @@ import {
   HelpCircle,
   Plus,
   Minus,
-  Crown
+  Crown,
+  ChevronLeft,
+  ChevronRight,
+  Clock,
+  Sparkles,
+  Zap,
+  Check
 } from "lucide-react";
 import "./GiveawayHome.css";
 
@@ -47,6 +53,48 @@ export default function GiveawayHome() {
 
   // Likes state for reward cards
   const [likedCardIds, setLikedCardIds] = useState(new Set());
+
+  // Horizontal Carousel Reference & Navigation State
+  const carouselRef = useRef(null);
+  const [carouselIndex, setCarouselIndex] = useState(0);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  // Update carousel scroll buttons and active slide index
+  const handleCarouselScroll = () => {
+    if (carouselRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
+      setCanScrollLeft(scrollLeft > 15);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 15);
+
+      const cardWidth = 296; // card (280) + gap (16)
+      const idx = Math.round(scrollLeft / cardWidth);
+      setCarouselIndex(Math.min(Math.max(0, idx), displayedCards.length - 1));
+    }
+  };
+
+  const scrollCarousel = (direction) => {
+    if (carouselRef.current) {
+      const scrollAmount = direction === "left" ? -300 : 300;
+      carouselRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+      setTimeout(handleCarouselScroll, 350);
+    }
+  };
+
+  const scrollToIndex = (idx) => {
+    if (carouselRef.current) {
+      const cards = carouselRef.current.children;
+      if (cards && cards[idx]) {
+        cards[idx].scrollIntoView({
+          behavior: "smooth",
+          inline: "start",
+          block: "nearest"
+        });
+        setCarouselIndex(idx);
+        setTimeout(handleCarouselScroll, 350);
+      }
+    }
+  };
 
   // FAQ Accordion Open State
   const [openFaqIndex, setOpenFaqIndex] = useState(0);
@@ -121,6 +169,16 @@ export default function GiveawayHome() {
 
   // Display top 6 prizes matching reference image grid, or all when expanded
   const displayedCards = showAllPrizes ? filteredPrizes : filteredPrizes.slice(0, 6);
+
+  // Reset carousel scroll when category or view mode changes
+  useEffect(() => {
+    if (carouselRef.current) {
+      carouselRef.current.scrollTo({ left: 0, behavior: "smooth" });
+      setCarouselIndex(0);
+      setCanScrollLeft(false);
+      setCanScrollRight(true);
+    }
+  }, [activeCategory, showAllPrizes]);
 
   // Recent winners data matching media_1793407830512_ba630f92.jpg
   const recentWinners = [
@@ -571,57 +629,121 @@ export default function GiveawayHome() {
         {/* RIGHT COLUMN: ACTIVE GIVEAWAYS, RECENT WINNERS, CTA, FAQ */}
         {/* ======================================================== */}
         <aside className="dashboard-right-col" aria-label="Active Giveaways and Community Feed">
-          {/* 1. ACTIVE GIVEAWAYS SECTION (6 CARDS GRID) */}
+          {/* 1. ACTIVE GIVEAWAYS SECTION (HORIZONTAL SCROLLING CAROUSEL) */}
           <div className="active-giveaways-container" id="active-giveaways-section">
             <div className="active-section-header">
               <div className="active-header-left">
                 <div className="active-title-flame">
-                  <Flame size={18} className="flame-orange" />
+                  <Flame size={19} className="flame-orange" />
                   <h2>Active Giveaways</h2>
+                  <span className="live-pulse-badge">LIVE</span>
                 </div>
                 <p>Participate in exciting giveaways and win amazing rewards</p>
               </div>
 
-              <button
-                className="active-view-all-btn"
-                onClick={() => setShowAllPrizes(!showAllPrizes)}
-              >
-                <span>{showAllPrizes ? "Show Top 6" : "View All"}</span>
-                <ArrowRight size={13} />
-              </button>
+              <div className="active-header-controls">
+                {/* Carousel Nav Arrows */}
+                <div className="carousel-nav-arrows" aria-label="Carousel navigation">
+                  <button
+                    className={`carousel-arrow-btn prev ${!canScrollLeft ? "disabled" : ""}`}
+                    onClick={() => scrollCarousel("left")}
+                    disabled={!canScrollLeft}
+                    aria-label="Previous Prize Card"
+                    title="Previous Prize"
+                  >
+                    <ChevronLeft size={16} />
+                  </button>
+                  <button
+                    className={`carousel-arrow-btn next ${!canScrollRight ? "disabled" : ""}`}
+                    onClick={() => scrollCarousel("right")}
+                    disabled={!canScrollRight}
+                    aria-label="Next Prize Card"
+                    title="Next Prize"
+                  >
+                    <ChevronRight size={16} />
+                  </button>
+                </div>
+
+                <button
+                  className="active-view-all-btn"
+                  onClick={() => setShowAllPrizes(!showAllPrizes)}
+                >
+                  <span>{showAllPrizes ? "Show Top 6" : "View All"}</span>
+                  <ArrowRight size={13} />
+                </button>
+              </div>
             </div>
 
-            {/* 6 Reward Cards Grid (Desktop: 2x3, Mobile: exactly 2 per row) */}
-            <div className="active-cards-grid">
+            {/* Horizontal Scrolling Carousel Track */}
+            <div
+              className="active-cards-carousel"
+              ref={carouselRef}
+              onScroll={handleCarouselScroll}
+              role="region"
+              aria-label="Active Giveaways Carousel"
+              tabIndex={0}
+            >
               {displayedCards.map((prize) => {
                 const isJoined = joinedPrizes.has(prize.id);
                 const isLiked = likedCardIds.has(prize.id);
 
+                // Specific theme per prize
+                const themeClass =
+                  prize.slug.includes("iphone")
+                    ? "theme-iphone"
+                    : prize.slug.includes("watch")
+                    ? "theme-watch"
+                    : prize.slug.includes("airpod")
+                    ? "theme-airpod"
+                    : prize.slug.includes("amazon")
+                    ? "theme-amazon"
+                    : prize.slug.includes("flipkart")
+                    ? "theme-flipkart"
+                    : prize.slug.includes("ps5") || prize.slug.includes("playstation")
+                    ? "theme-ps5"
+                    : `theme-${prize.color || "purple"}`;
+
                 return (
                   <article
                     key={prize.id}
-                    className={`active-prize-card ${prize.color} ${isJoined ? "joined" : ""}`}
+                    className={`active-prize-card ${themeClass} ${isJoined ? "joined" : ""}`}
                     onClick={() => navigateToGiveaway(prize.slug)}
                   >
-                    {/* Top Row: Prize Position Badge + Heart Likes */}
+                    {/* Top Row: Prize Badge + Cost Chip + Heart Likes */}
                     <div className="card-top-header">
-                      <span className={`position-badge ${prize.color}`}>
-                        {prize.position}
-                      </span>
+                      <div className="card-badge-group">
+                        <span className={`position-badge ${prize.color || "purple"}`}>
+                          {prize.slug.includes("ps5") ? (
+                            <Gamepad2 size={11} />
+                          ) : prize.position === "1ST PRIZE" ? (
+                            <Crown size={11} />
+                          ) : (
+                            <Sparkles size={11} />
+                          )}
+                          <span>{prize.position}</span>
+                        </span>
+
+                        <span className="card-cost-chip" title={`Entry fee: ${prize.entryFee} ${prize.currency}`}>
+                          <Zap size={10} className="zap-icon" />
+                          <span>{prize.entryFee} {prize.currency}</span>
+                        </span>
+                      </div>
 
                       <button
                         className={`card-heart-btn ${isLiked ? "liked" : ""}`}
                         onClick={(e) => toggleLike(e, prize.id)}
                         aria-label={`Like ${prize.name}`}
+                        title="Add to favorites"
                       >
                         <Heart size={12} fill={isLiked ? "#ec4899" : "none"} />
                         <span>{prize.likes || "12.3K"}</span>
                       </button>
                     </div>
 
-                    {/* Product Image Stage with Glow */}
+                    {/* 3D Product Stage with Glowing Neon Pedestal */}
                     <div className="card-image-stage">
-                      <div className={`stage-radial-glow ${prize.color}`} />
+                      <div className={`stage-radial-glow ${prize.color || "purple"}`} />
+                      <div className="stage-pedestal-ellipse" />
                       <img
                         src={prize.image}
                         alt={prize.name}
@@ -630,7 +752,7 @@ export default function GiveawayHome() {
                       />
                     </div>
 
-                    {/* Card Content */}
+                    {/* Card Content & Metrics */}
                     <div className="card-details-box">
                       <div className="card-name-val-row">
                         <h3 className="card-product-name" title={prize.name}>
@@ -643,11 +765,28 @@ export default function GiveawayHome() {
                         {prize.spec}
                       </p>
 
+                      {/* Social Metrics: Participants & Days Left */}
+                      <div className="card-meta-chips-row">
+                        <span className="meta-chip participants">
+                          <Users size={11} />
+                          <span>{prize.participants || "8.5K"}</span>
+                        </span>
+                        <span className="meta-chip time-left">
+                          <Clock size={11} />
+                          <span>{prize.daysLeft || 12}d left</span>
+                        </span>
+                      </div>
+
                       {/* Entries Progress Bar */}
                       <div className="card-entry-progress-wrap">
-                        <span className="card-entry-text">
-                          {prize.entriesProgress || "12.3K / 25K Entries"}
-                        </span>
+                        <div className="progress-labels-mini">
+                          <span className="card-entry-text">
+                            {prize.entriesProgress || "12.3K / 25K Entries"}
+                          </span>
+                          <span className="progress-pct-text">
+                            {prize.progressPercent || 45}%
+                          </span>
+                        </div>
                         <div className="card-progress-track">
                           <div
                             className="card-progress-fill"
@@ -661,13 +800,39 @@ export default function GiveawayHome() {
                         className={`card-join-cta-btn ${isJoined ? "is-joined" : ""}`}
                         onClick={(e) => handleJoinClick(e, prize)}
                       >
-                        <span>{isJoined ? "Participating ✓" : "Join Now"}</span>
-                        <ArrowRight size={13} />
+                        {isJoined ? (
+                          <>
+                            <Check size={14} className="check-joined-icon" />
+                            <span>Participating ✓</span>
+                          </>
+                        ) : (
+                          <>
+                            <span>Join Now</span>
+                            <ArrowRight size={13} />
+                          </>
+                        )}
                       </button>
                     </div>
                   </article>
                 );
               })}
+            </div>
+
+            {/* Carousel Pagination Dots & Navigation Indicators */}
+            <div className="carousel-pagination-row">
+              <div className="carousel-dots-list" aria-label="Carousel pagination dots">
+                {displayedCards.map((p, dotIdx) => (
+                  <button
+                    key={p.id || dotIdx}
+                    className={`carousel-dot ${dotIdx === carouselIndex ? "active" : ""}`}
+                    onClick={() => scrollToIndex(dotIdx)}
+                    aria-label={`Go to slide ${dotIdx + 1} (${p.name})`}
+                  />
+                ))}
+              </div>
+              <div className="carousel-counter-text">
+                <span>Swipe or use arrows to view all <strong>{displayedCards.length}</strong> rewards</span>
+              </div>
             </div>
           </div>
 

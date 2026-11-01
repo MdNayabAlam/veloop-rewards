@@ -936,22 +936,25 @@
   width: 100%;
 }
 
-/* 1. ACTIVE GIVEAWAYS SECTION */
+/* 1. ACTIVE GIVEAWAYS SECTION (HORIZONTAL SCROLLING CAROUSEL) */
 .active-giveaways-container {
-  background: rgba(14, 11, 28, 0.85);
-  border: 1px solid rgba(168, 85, 247, 0.25);
+  background: linear-gradient(180deg, rgba(16, 12, 32, 0.92) 0%, rgba(9, 7, 20, 0.97) 100%);
+  border: 1px solid rgba(168, 85, 247, 0.28);
   border-radius: 24px;
-  padding: 22px 20px;
-  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.6);
+  padding: 24px 22px 20px;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.7), 0 0 30px rgba(168, 85, 247, 0.12);
   box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
 }
 
 .active-section-header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   margin-bottom: 18px;
   gap: 12px;
+  flex-wrap: wrap;
 }
 
 .active-header-left {
@@ -967,10 +970,26 @@
 }
 
 .active-title-flame h2 {
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   font-weight: 900;
   color: #ffffff;
   margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.live-pulse-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 7px;
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.45);
+  border-radius: 12px;
+  font-size: 0.58rem;
+  font-weight: 800;
+  color: #4ade80;
+  letter-spacing: 0.06em;
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.3);
 }
 
 .flame-orange {
@@ -983,11 +1002,57 @@
   margin: 0;
 }
 
+.active-header-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.carousel-nav-arrows {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.carousel-arrow-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  color: #e9d5ff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(8px);
+}
+
+.carousel-arrow-btn:hover:not(:disabled) {
+  background: rgba(168, 85, 247, 0.25);
+  border-color: #c084fc;
+  color: #ffffff;
+  transform: scale(1.08);
+  box-shadow: 0 0 16px rgba(168, 85, 247, 0.45);
+}
+
+.carousel-arrow-btn:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.carousel-arrow-btn:disabled,
+.carousel-arrow-btn.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
 .active-view-all-btn {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 14px;
+  padding: 7px 14px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.12);
   color: #e2e8f0;
@@ -1005,111 +1070,310 @@
   color: #ffffff;
 }
 
-/* 6 Active Cards Grid: Desktop 2 columns */
-.active-cards-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-  width: 100%;
+/* Horizontal Scrolling Carousel Track */
+.active-cards-carousel {
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  padding: 8px 4px 16px;
+  margin: 0 -4px;
   box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(168, 85, 247, 0.4) rgba(255, 255, 255, 0.03);
 }
 
+.active-cards-carousel::-webkit-scrollbar {
+  height: 6px;
+}
+
+.active-cards-carousel::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+}
+
+.active-cards-carousel::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, rgba(168, 85, 247, 0.5), rgba(236, 72, 153, 0.5));
+  border-radius: 10px;
+}
+
+.active-cards-carousel::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(90deg, #a855f7, #ec4899);
+}
+
+/* Individual Prize Card */
 .active-prize-card {
-  background: linear-gradient(180deg, rgba(22, 17, 40, 0.9) 0%, rgba(13, 10, 26, 0.96) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 18px;
-  padding: 12px 10px 14px;
+  flex: 0 0 280px;
+  scroll-snap-align: start;
+  background: linear-gradient(165deg, rgba(22, 17, 42, 0.95) 0%, rgba(13, 10, 26, 0.98) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 20px;
+  padding: 14px 14px 16px;
   display: flex;
   flex-direction: column;
   position: relative;
   cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
   box-sizing: border-box;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
 .active-prize-card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(168, 85, 247, 0.45);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7), 0 0 18px rgba(168, 85, 247, 0.25);
+  transform: translateY(-5px);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.8), 0 0 28px rgba(168, 85, 247, 0.3);
 }
 
+/* Unique Card Theme Styling per Prize */
+.active-prize-card.theme-iphone {
+  background: linear-gradient(165deg, rgba(34, 18, 60, 0.96) 0%, rgba(16, 11, 30, 0.98) 100%);
+  border-color: rgba(168, 85, 247, 0.38);
+}
+.active-prize-card.theme-iphone:hover {
+  border-color: #a855f7;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.85), 0 0 32px rgba(168, 85, 247, 0.4);
+}
+.active-prize-card.theme-iphone .stage-radial-glow {
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.45) 0%, rgba(245, 158, 11, 0.2) 60%, transparent 80%);
+}
+.active-prize-card.theme-iphone .stage-pedestal-ellipse {
+  border-bottom-color: rgba(245, 158, 11, 0.45);
+  box-shadow: 0 4px 16px rgba(168, 85, 247, 0.4);
+}
+
+.active-prize-card.theme-watch {
+  background: linear-gradient(165deg, rgba(14, 28, 56, 0.96) 0%, rgba(9, 15, 34, 0.98) 100%);
+  border-color: rgba(56, 189, 248, 0.35);
+}
+.active-prize-card.theme-watch:hover {
+  border-color: #38bdf8;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.85), 0 0 32px rgba(56, 189, 248, 0.4);
+}
+.active-prize-card.theme-watch .stage-radial-glow {
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.45) 0%, rgba(37, 99, 235, 0.2) 60%, transparent 80%);
+}
+.active-prize-card.theme-watch .stage-pedestal-ellipse {
+  border-bottom-color: rgba(56, 189, 248, 0.5);
+  box-shadow: 0 4px 16px rgba(56, 189, 248, 0.4);
+}
+.active-prize-card.theme-watch .card-join-cta-btn:not(.is-joined) {
+  background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
+  box-shadow: 0 4px 16px rgba(14, 165, 233, 0.4);
+}
+.active-prize-card.theme-watch .card-join-cta-btn:hover:not(.is-joined) {
+  box-shadow: 0 6px 22px rgba(14, 165, 233, 0.6);
+}
+
+.active-prize-card.theme-airpod {
+  background: linear-gradient(165deg, rgba(12, 34, 26, 0.96) 0%, rgba(8, 19, 16, 0.98) 100%);
+  border-color: rgba(16, 185, 129, 0.35);
+}
+.active-prize-card.theme-airpod:hover {
+  border-color: #10b981;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.85), 0 0 32px rgba(16, 185, 129, 0.4);
+}
+.active-prize-card.theme-airpod .stage-radial-glow {
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.45) 0%, rgba(5, 150, 105, 0.2) 60%, transparent 80%);
+}
+.active-prize-card.theme-airpod .stage-pedestal-ellipse {
+  border-bottom-color: rgba(16, 185, 129, 0.5);
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);
+}
+.active-prize-card.theme-airpod .card-join-cta-btn:not(.is-joined) {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);
+}
+.active-prize-card.theme-airpod .card-join-cta-btn:hover:not(.is-joined) {
+  box-shadow: 0 6px 22px rgba(16, 185, 129, 0.6);
+}
+
+.active-prize-card.theme-amazon {
+  background: linear-gradient(165deg, rgba(38, 24, 12, 0.96) 0%, rgba(19, 13, 8, 0.98) 100%);
+  border-color: rgba(245, 158, 11, 0.35);
+}
+.active-prize-card.theme-amazon:hover {
+  border-color: #f59e0b;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.85), 0 0 32px rgba(245, 158, 11, 0.4);
+}
+.active-prize-card.theme-amazon .stage-radial-glow {
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.45) 0%, rgba(234, 88, 12, 0.2) 60%, transparent 80%);
+}
+.active-prize-card.theme-amazon .stage-pedestal-ellipse {
+  border-bottom-color: rgba(245, 158, 11, 0.5);
+  box-shadow: 0 4px 16px rgba(245, 158, 11, 0.4);
+}
+.active-prize-card.theme-amazon .card-join-cta-btn:not(.is-joined) {
+  background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
+  box-shadow: 0 4px 16px rgba(245, 158, 11, 0.4);
+}
+.active-prize-card.theme-amazon .card-join-cta-btn:hover:not(.is-joined) {
+  box-shadow: 0 6px 22px rgba(245, 158, 11, 0.6);
+}
+
+.active-prize-card.theme-flipkart {
+  background: linear-gradient(165deg, rgba(14, 24, 52, 0.96) 0%, rgba(8, 14, 30, 0.98) 100%);
+  border-color: rgba(37, 99, 235, 0.38);
+}
+.active-prize-card.theme-flipkart:hover {
+  border-color: #3b82f6;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.85), 0 0 32px rgba(37, 99, 235, 0.4);
+}
+.active-prize-card.theme-flipkart .stage-radial-glow {
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.45) 0%, rgba(30, 64, 175, 0.2) 60%, transparent 80%);
+}
+.active-prize-card.theme-flipkart .stage-pedestal-ellipse {
+  border-bottom-color: rgba(59, 130, 246, 0.5);
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4);
+}
+.active-prize-card.theme-flipkart .card-join-cta-btn:not(.is-joined) {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4);
+}
+.active-prize-card.theme-flipkart .card-join-cta-btn:hover:not(.is-joined) {
+  box-shadow: 0 6px 22px rgba(37, 99, 235, 0.6);
+}
+
+.active-prize-card.theme-ps5 {
+  background: linear-gradient(165deg, rgba(30, 14, 50, 0.96) 0%, rgba(16, 9, 28, 0.98) 100%);
+  border-color: rgba(236, 72, 153, 0.4);
+}
+.active-prize-card.theme-ps5:hover {
+  border-color: #ec4899;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.85), 0 0 32px rgba(236, 72, 153, 0.45);
+}
+.active-prize-card.theme-ps5 .stage-radial-glow {
+  background: radial-gradient(circle, rgba(236, 72, 153, 0.45) 0%, rgba(139, 92, 246, 0.25) 60%, transparent 80%);
+}
+.active-prize-card.theme-ps5 .stage-pedestal-ellipse {
+  border-bottom-color: rgba(236, 72, 153, 0.5);
+  box-shadow: 0 4px 16px rgba(236, 72, 153, 0.4);
+}
+.active-prize-card.theme-ps5 .card-join-cta-btn:not(.is-joined) {
+  background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+  box-shadow: 0 4px 16px rgba(236, 72, 153, 0.4);
+}
+.active-prize-card.theme-ps5 .card-join-cta-btn:hover:not(.is-joined) {
+  box-shadow: 0 6px 22px rgba(236, 72, 153, 0.6);
+}
+
+/* Card Top Header & Chips */
 .card-top-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   gap: 6px;
 }
 
-.position-badge {
-  font-size: 0.62rem;
-  font-weight: 800;
-  padding: 2px 7px;
-  border-radius: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-  white-space: nowrap;
+.card-badge-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
 }
 
-.position-badge.purple { background: rgba(245, 158, 11, 0.18); border: 1px solid rgba(245, 158, 11, 0.4); color: #fbbf24; }
-.position-badge.blue { background: rgba(59, 130, 246, 0.18); border: 1px solid rgba(59, 130, 246, 0.4); color: #60a5fa; }
-.position-badge.green { background: rgba(16, 185, 129, 0.18); border: 1px solid rgba(16, 185, 129, 0.4); color: #34d399; }
-.position-badge.orange { background: rgba(249, 115, 22, 0.18); border: 1px solid rgba(249, 115, 22, 0.4); color: #fb923c; }
+.position-badge {
+  font-size: 0.64rem;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.position-badge.purple { background: rgba(245, 158, 11, 0.18); border: 1px solid rgba(245, 158, 11, 0.45); color: #fbbf24; }
+.position-badge.blue { background: rgba(59, 130, 246, 0.18); border: 1px solid rgba(59, 130, 246, 0.45); color: #60a5fa; }
+.position-badge.green { background: rgba(16, 185, 129, 0.18); border: 1px solid rgba(16, 185, 129, 0.45); color: #34d399; }
+.position-badge.orange { background: rgba(249, 115, 22, 0.18); border: 1px solid rgba(249, 115, 22, 0.45); color: #fb923c; }
+
+.card-cost-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 7px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  border-radius: 12px;
+  font-size: 0.62rem;
+  font-weight: 800;
+  color: #fbbf24;
+  letter-spacing: 0.02em;
+}
+
+.zap-icon {
+  color: #fbbf24;
+}
 
 .card-heart-btn {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
-  padding: 2px 6px;
+  padding: 3px 8px;
   color: #94a3b8;
-  font-size: 0.62rem;
+  font-size: 0.64rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s ease;
+  flex-shrink: 0;
 }
 
 .card-heart-btn:hover,
 .card-heart-btn.liked {
   color: #ec4899;
-  border-color: rgba(236, 72, 153, 0.4);
+  border-color: rgba(236, 72, 153, 0.45);
+  background: rgba(236, 72, 153, 0.1);
 }
 
 .card-image-stage {
-  height: 95px;
+  height: 110px;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .stage-radial-glow {
   position: absolute;
-  width: 90px;
-  height: 40px;
+  width: 140px;
+  height: 70px;
   border-radius: 50%;
-  filter: blur(12px);
+  filter: blur(16px);
   pointer-events: none;
 }
-.stage-radial-glow.purple { background: rgba(168, 85, 247, 0.35); }
-.stage-radial-glow.blue { background: rgba(59, 130, 246, 0.35); }
-.stage-radial-glow.green { background: rgba(16, 185, 129, 0.35); }
-.stage-radial-glow.orange { background: rgba(249, 115, 22, 0.35); }
+
+.stage-pedestal-ellipse {
+  position: absolute;
+  bottom: 12px;
+  width: 120px;
+  height: 22px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(255, 255, 255, 0.16) 0%, transparent 70%);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+}
 
 .card-product-img {
-  max-height: 80px;
+  max-height: 85px;
   max-width: 85%;
   object-fit: contain;
-  z-index: 1;
-  transition: transform 0.25s ease;
+  z-index: 2;
+  filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.7));
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .active-prize-card:hover .card-product-img {
-  transform: translateY(-3px) scale(1.05);
+  transform: translateY(-5px) scale(1.08);
+  filter: drop-shadow(0 14px 22px rgba(0, 0, 0, 0.85));
 }
 
 .card-details-box {
@@ -1122,15 +1386,16 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  gap: 4px;
+  gap: 6px;
   margin-bottom: 2px;
 }
 
 .card-product-name {
-  font-size: 0.85rem;
+  font-size: 0.98rem;
   font-weight: 800;
   color: #ffffff;
   margin: 0;
+  letter-spacing: -0.01em;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1138,15 +1403,16 @@
 }
 
 .card-inr-badge {
-  font-size: 0.72rem;
-  font-weight: 800;
+  font-size: 0.82rem;
+  font-weight: 900;
   color: #34d399;
+  text-shadow: 0 0 10px rgba(52, 211, 153, 0.3);
   white-space: nowrap;
   flex-shrink: 0;
 }
 
 .card-product-spec {
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   color: #94a3b8;
   margin: 0 0 8px;
   white-space: nowrap;
@@ -1154,22 +1420,53 @@
   text-overflow: ellipsis;
 }
 
-.card-entry-progress-wrap {
+.card-meta-chips-row {
   display: flex;
-  flex-direction: column;
-  gap: 3px;
+  align-items: center;
+  gap: 8px;
   margin-bottom: 10px;
 }
 
-.card-entry-text {
-  font-size: 0.64rem;
+.meta-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 7px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  font-size: 0.65rem;
   font-weight: 700;
   color: #cbd5e1;
 }
 
+.card-entry-progress-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.progress-labels-mini {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-entry-text {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #cbd5e1;
+}
+
+.progress-pct-text {
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #a855f7;
+}
+
 .card-progress-track {
   width: 100%;
-  height: 4px;
+  height: 5px;
   background: rgba(255, 255, 255, 0.08);
   border-radius: 6px;
   overflow: hidden;
@@ -1179,37 +1476,94 @@
   height: 100%;
   background: linear-gradient(90deg, #d946ef, #ec4899);
   border-radius: 6px;
+  transition: width 0.4s ease;
 }
 
 .card-join-cta-btn {
   width: 100%;
-  padding: 7px 10px;
+  padding: 9px 12px;
   background: linear-gradient(135deg, #d946ef 0%, #ec4899 50%, #f43f5e 100%);
   color: #ffffff;
   border: none;
-  border-radius: 10px;
-  font-size: 0.74rem;
+  border-radius: 12px;
+  font-size: 0.78rem;
   font-weight: 800;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(236, 72, 153, 0.35);
-  transition: all 0.2s ease;
+  box-shadow: 0 4px 16px rgba(236, 72, 153, 0.4);
+  transition: all 0.22s ease;
   margin-top: auto;
 }
 
 .card-join-cta-btn:hover {
-  box-shadow: 0 6px 18px rgba(236, 72, 153, 0.55);
-  transform: translateY(-1px);
+  box-shadow: 0 6px 22px rgba(236, 72, 153, 0.6);
+  transform: translateY(-2px);
+}
+
+.card-join-cta-btn:active {
+  transform: scale(0.97);
 }
 
 .card-join-cta-btn.is-joined {
   background: rgba(16, 185, 129, 0.2);
-  border: 1px solid rgba(16, 185, 129, 0.4);
+  border: 1px solid rgba(16, 185, 129, 0.45);
   color: #34d399;
-  box-shadow: none;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.2);
+}
+
+.check-joined-icon {
+  color: #34d399;
+}
+
+/* Carousel Pagination Row */
+.carousel-pagination-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.carousel-dots-list {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.18);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.carousel-dot:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.carousel-dot.active {
+  width: 22px;
+  background: linear-gradient(90deg, #d946ef, #8b5cf6);
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.6);
+}
+
+.carousel-counter-text {
+  font-size: 0.72rem;
+  color: #94a3b8;
+}
+
+.carousel-counter-text strong {
+  color: #e2e8f0;
 }
 
 /* 2. RECENT WINNERS CARD */
@@ -1527,7 +1881,7 @@
 
 @media (max-width: 768px) {
   .giveaway-dashboard-layout {
-    padding: 10px 0 32px;
+    padding: 10px 0 85px;
   }
   .dashboard-main-container {
     padding: 0 10px;
@@ -1661,38 +2015,57 @@
     justify-content: center;
   }
 
-  /* Active Giveaways Grid Mobile: Strictly 2 cards per row */
+  /* Active Giveaways Horizontal Carousel Mobile */
   .active-giveaways-container {
-    padding: 16px 10px;
+    padding: 16px 12px;
     border-radius: 18px;
   }
-  .active-cards-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 8px !important;
+  .active-section-header {
+    margin-bottom: 12px;
+  }
+  .active-title-flame h2 {
+    font-size: 1.15rem;
+  }
+  .active-header-controls {
+    gap: 8px;
+  }
+  .carousel-arrow-btn {
+    width: 30px;
+    height: 30px;
+  }
+  .active-view-all-btn {
+    padding: 5px 10px;
+    font-size: 0.68rem;
+  }
+  .active-cards-carousel {
+    gap: 14px;
+    padding: 4px 2px 14px;
+    margin: 0;
   }
   .active-prize-card {
-    padding: 8px 6px 10px !important;
-    border-radius: 14px;
+    flex: 0 0 268px;
+    padding: 12px 12px 14px;
+    border-radius: 16px;
   }
   .card-image-stage {
-    height: 75px;
+    height: 100px;
   }
   .card-product-img {
-    max-height: 60px;
+    max-height: 78px;
   }
   .card-product-name {
-    font-size: 0.74rem;
+    font-size: 0.95rem;
   }
   .card-inr-badge {
-    font-size: 0.65rem;
+    font-size: 0.78rem;
   }
   .card-product-spec {
-    font-size: 0.62rem;
-    margin-bottom: 5px;
+    font-size: 0.68rem;
+    margin-bottom: 6px;
   }
   .card-join-cta-btn {
-    font-size: 0.68rem;
-    padding: 6px 8px;
+    font-size: 0.76rem;
+    padding: 8px 10px;
   }
 
   /* How it works mobile: 2x2 */
@@ -1734,15 +2107,19 @@
   .hero-win-headline {
     font-size: 1.3rem;
   }
+  .active-prize-card {
+    flex: 0 0 250px;
+  }
   .card-product-name {
-    font-size: 0.7rem;
+    font-size: 0.9rem;
   }
   .position-badge {
-    font-size: 0.54rem;
-    padding: 2px 4px;
+    font-size: 0.58rem;
+    padding: 2px 5px;
   }
   .card-heart-btn {
-    font-size: 0.56rem;
-    padding: 2px 4px;
+    font-size: 0.58rem;
+    padding: 2px 5px;
   }
 }
+

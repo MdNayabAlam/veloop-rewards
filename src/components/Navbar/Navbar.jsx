@@ -12,7 +12,8 @@ import {
   Menu,
   X,
   Search,
-  Sparkles
+  Sparkles,
+  ChevronRight
 } from "lucide-react";
 import "./Navbar.css";
 
