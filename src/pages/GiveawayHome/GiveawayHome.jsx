@@ -31,7 +31,9 @@ import {
   Clock,
   Sparkles,
   Zap,
-  Check
+  Check,
+  Globe,
+  Award
 } from "lucide-react";
 import "./GiveawayHome.css";
 
@@ -180,55 +182,155 @@ export default function GiveawayHome() {
     }
   }, [activeCategory, showAllPrizes]);
 
-  // Recent winners data matching media_1793407830512_ba630f92.jpg
+  // How It Works - 4 Connected Steps with Numbering & Enhanced Visuals
+  const howSteps = [
+    {
+      step: "01",
+      badge: "STEP 01",
+      icon: <UserCheck size={20} />,
+      color: "purple",
+      title: "Create Account",
+      subtitle: "Instant & Free",
+      desc: "Sign up in 30 seconds and receive 100 Welcome VEs automatically."
+    },
+    {
+      step: "02",
+      badge: "STEP 02",
+      icon: <CheckCircle2 size={20} />,
+      color: "blue",
+      title: "Complete Tasks",
+      subtitle: "Daily Fun",
+      desc: "Try new games, complete surveys, or check in daily to collect points."
+    },
+    {
+      step: "03",
+      badge: "STEP 03",
+      icon: <Gift size={20} />,
+      color: "pink",
+      title: "Earn Entries",
+      subtitle: "Multiple Chances",
+      desc: "Use your VEs to get tickets for gadgets, consoles & gift cards."
+    },
+    {
+      step: "04",
+      badge: "STEP 04",
+      icon: <Trophy size={20} />,
+      color: "gold",
+      title: "Win Rewards",
+      subtitle: "Doorstep Delivery",
+      desc: "Winners drawn live on-chain with free, insured brand warranty shipping."
+    }
+  ];
+
+  // Trusted by Thousands - 4 Premium Feature Cards
+  const trustFeatures = [
+    {
+      id: "t1",
+      icon: <ShieldCheck size={22} />,
+      color: "green",
+      badge: "100% SECURE",
+      title: "Bank-Grade Encryption",
+      desc: "Military-grade 256-bit SSL encryption protects your account and data privacy."
+    },
+    {
+      id: "t2",
+      icon: <Sparkles size={22} />,
+      color: "purple",
+      badge: "PROVABLY FAIR",
+      title: "Verifiable Draws",
+      desc: "Cryptographic RNG seeds guarantee 100% tamper-proof winner selection."
+    },
+    {
+      id: "t3",
+      icon: <Award size={22} />,
+      color: "gold",
+      badge: "OFFICIAL PRIZES",
+      title: "Real Brand Rewards",
+      desc: "Sealed authentic products with full manufacturer brand warranty & fast dispatch."
+    },
+    {
+      id: "t4",
+      icon: <Globe size={22} />,
+      color: "blue",
+      badge: "WORLDWIDE",
+      title: "Global Community",
+      desc: "Active community of 100,000+ members enjoying transparent weekly rewards."
+    }
+  ];
+
+  // Recent Winners with rich information hierarchy & larger visuals
   const recentWinners = [
     {
       id: "w1",
       name: "Rahul S.",
-      prize: "Won iPhone 15",
+      location: "Delhi, IN",
+      prize: "iPhone 15 Pro",
+      prizeSpec: "128GB Titanium",
+      value: "₹1,19,900",
       time: "2 days ago",
-      image: "/assets/iphone.png"
+      image: "/assets/iphone.png",
+      status: "Delivered ✓",
+      ticketId: "#VR-8842"
     },
     {
       id: "w2",
       name: "Priya M.",
-      prize: "Won Apple Watch",
+      location: "Mumbai, IN",
+      prize: "Apple Watch Series 9",
+      prizeSpec: "GPS 45mm",
+      value: "₹41,900",
       time: "1 week ago",
-      image: "/assets/watch.png"
+      image: "/assets/watch.png",
+      status: "Delivered ✓",
+      ticketId: "#VR-7731"
     },
     {
       id: "w3",
       name: "Aman K.",
-      prize: "Won AirPods Pro",
+      location: "Bangalore, IN",
+      prize: "AirPods Pro 2",
+      prizeSpec: "Active Noise Cancel",
+      value: "₹24,900",
       time: "2 weeks ago",
-      image: "/assets/airpod.png"
+      image: "/assets/airpod.png",
+      status: "Delivered ✓",
+      ticketId: "#VR-6619"
     },
     {
       id: "w4",
       name: "Sneha T.",
-      prize: "Won Amazon Gift Card",
+      location: "Pune, IN",
+      prize: "Amazon Gift Card",
+      prizeSpec: "₹2,000 Digital Code",
+      value: "₹2,000",
       time: "3 weeks ago",
-      image: "/assets/amazon card.png"
+      image: "/assets/amazon card.png",
+      status: "Claimed ✓",
+      ticketId: "#VR-5502"
     }
   ];
 
-  // FAQs data matching media_1793407830512_ba630f92.jpg
+  // FAQs data with category tags
   const faqs = [
     {
       q: "How do I participate in a giveaway?",
-      a: "Select your desired giveaway, complete simple tasks or use your VEs/SVEs entries to register. Each entry increases your winning chances!"
+      a: "Select your desired giveaway, complete simple tasks or use your VEs/SVEs entries to register. Each entry increases your winning chances!",
+      category: "Participation"
     },
     {
-      q: "Are the rewards real?",
-      a: "Yes! 100% of our rewards are authentic and provably fair. Winners receive official retail brand-sealed products or instant verified gift codes."
+      q: "Are the rewards real and authentic?",
+      a: "Yes, 100%! All physical rewards are brand-sealed with official manufacturer warranty. Digital vouchers are delivered directly to your verified email within minutes.",
+      category: "Rewards"
     },
     {
-      q: "Is it free to join?",
-      a: "Absolutely! You can earn VEs and Super VEs for free by completing daily check-ins, app trials, and community engagement tasks."
+      q: "Is it completely free to join?",
+      a: "Absolutely! You can earn VEs and Super VEs for free by completing daily check-ins, app trials, mini-games, and community engagement tasks with zero deposit required.",
+      category: "Cost & VEs"
     },
     {
-      q: "How are winners selected?",
-      a: "Winners are drawn using cryptographically verifiable random seeds on our smart lottery engine once the countdown expires."
+      q: "How are winners selected fairly?",
+      a: "Winners are drawn using cryptographically verifiable random seeds on our smart lottery engine once the countdown expires. All draw proofs are permanently archived.",
+      category: "Fairness"
     }
   ];
 
@@ -524,103 +626,87 @@ export default function GiveawayHome() {
             </div>
           </div>
 
-          {/* 5. HOW IT WORKS? SECTION */}
+          {/* 5. HOW IT WORKS? SECTION (CONNECTED ROADMAP WITH NUMBERING) */}
           <div className="how-it-works-dashboard-card" id="how-it-works-section">
             <div className="how-card-header">
               <div className="how-shield-icon">
-                <ShieldCheck size={18} />
+                <ShieldCheck size={20} />
               </div>
               <div className="how-title-box">
-                <h3>How It Works?</h3>
-                <p>It's simple! Follow these steps and start winning amazing rewards.</p>
+                <div className="how-title-line">
+                  <h3>How It Works</h3>
+                  <span className="how-badge-pill">4 SIMPLE STEPS</span>
+                </div>
+                <p>Follow these quick steps and start winning verified rewards today.</p>
               </div>
             </div>
 
-            <div className="how-four-steps-grid">
-              <div className="how-step-card step-purple">
-                <div className="step-circle-icon purple">
-                  <UserCheck size={18} />
-                </div>
-                <div className="step-info">
-                  <h4>Create Account</h4>
-                  <p>Sign up for free</p>
-                </div>
-              </div>
+            {/* Connected Steps Pathway */}
+            <div className="how-connected-track-container">
+              {/* Laser Connector Line */}
+              <div className="how-connecting-laser-line" aria-hidden="true" />
 
-              <div className="how-step-card step-blue">
-                <div className="step-circle-icon blue">
-                  <CheckCircle2 size={18} />
-                </div>
-                <div className="step-info">
-                  <h4>Complete Tasks</h4>
-                  <p>Do simple tasks</p>
-                </div>
-              </div>
+              <div className="how-connected-steps-grid">
+                {howSteps.map((s) => (
+                  <div key={s.step} className={`how-step-card step-${s.color}`}>
+                    {/* Top Row: Futuristic Step Number Badge & Watermark */}
+                    <div className="step-card-top">
+                      <span className={`step-pill-badge ${s.color}`}>{s.badge}</span>
+                      <span className="step-number-watermark">{s.step}</span>
+                    </div>
 
-              <div className="how-step-card step-pink">
-                <div className="step-circle-icon pink">
-                  <Gift size={18} />
-                </div>
-                <div className="step-info">
-                  <h4>Earn Entries</h4>
-                  <p>Get more entries</p>
-                </div>
-              </div>
+                    {/* Glowing Icon Hub */}
+                    <div className={`step-icon-stage ${s.color}`}>
+                      <div className="step-stage-glow" />
+                      <div className="step-icon-symbol">{s.icon}</div>
+                    </div>
 
-              <div className="how-step-card step-gold">
-                <div className="step-circle-icon gold">
-                  <Trophy size={18} />
-                </div>
-                <div className="step-info">
-                  <h4>Win Rewards</h4>
-                  <p>Be a lucky winner!</p>
-                </div>
+                    {/* Step Content */}
+                    <div className="step-content-box">
+                      <h4 className="step-title">{s.title}</h4>
+                      <span className="step-subtitle-tag">{s.subtitle}</span>
+                      <p className="step-desc-text">{s.desc}</p>
+                    </div>
+
+                    {/* Bottom Connecting Node Dot */}
+                    <div className="step-card-footer-node">
+                      <span className={`node-dot ${s.color}`} />
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
 
-          {/* 6. TRUSTED BY THOUSANDS FOOTER BAR */}
+          {/* 6. TRUSTED BY THOUSANDS (PREMIUM FEATURE CARDS) */}
           <div className="trusted-by-thousands-bar">
             <div className="trust-bar-header">
-              <ShieldCheck size={20} className="trust-green-shield" />
+              <div className="trust-shield-glow">
+                <ShieldCheck size={22} className="trust-green-shield" />
+              </div>
               <div className="trust-header-text">
-                <h3>Trusted by Thousands</h3>
-                <p>A safe, secure and trusted platform for giveaways.</p>
+                <div className="trust-title-row">
+                  <h3>Trusted by Thousands</h3>
+                  <span className="trust-guarantee-badge">100% VERIFIED PLATFORM</span>
+                </div>
+                <p>Industry-standard security, provably fair transparency, and authentic brand partnerships.</p>
               </div>
             </div>
 
-            <div className="trust-four-badges-row">
-              <div className="trust-badge-pill">
-                <span className="dot-green" />
-                <div className="trust-pill-txt">
-                  <strong>100% Secure</strong>
-                  <small>Your data is safe</small>
+            {/* 4 Premium Feature Cards */}
+            <div className="trust-premium-cards-grid">
+              {trustFeatures.map((feat) => (
+                <div key={feat.id} className={`trust-feature-card ${feat.color}`}>
+                  <div className="trust-card-top">
+                    <div className={`trust-icon-box ${feat.color}`}>
+                      {feat.icon}
+                    </div>
+                    <span className={`trust-mini-tag ${feat.color}`}>{feat.badge}</span>
+                  </div>
+                  <h4 className="trust-card-title">{feat.title}</h4>
+                  <p className="trust-card-desc">{feat.desc}</p>
                 </div>
-              </div>
-
-              <div className="trust-badge-pill">
-                <span className="dot-purple" />
-                <div className="trust-pill-txt">
-                  <strong>Fair & Transparent</strong>
-                  <small>Winners are real</small>
-                </div>
-              </div>
-
-              <div className="trust-badge-pill">
-                <span className="dot-gold" />
-                <div className="trust-pill-txt">
-                  <strong>Real Rewards</strong>
-                  <small>No fake prizes</small>
-                </div>
-              </div>
-
-              <div className="trust-badge-pill">
-                <span className="dot-blue" />
-                <div className="trust-pill-txt">
-                  <strong>Global Community</strong>
-                  <small>Join thousands</small>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>
@@ -740,7 +826,7 @@ export default function GiveawayHome() {
                       </button>
                     </div>
 
-                    {/* 3D Product Stage with Glowing Neon Pedestal */}
+                    {/* 3D Product Stage with Larger Visuals, Glowing Neon Pedestal, and Countdown Badge */}
                     <div className="card-image-stage">
                       <div className={`stage-radial-glow ${prize.color || "purple"}`} />
                       <div className="stage-pedestal-ellipse" />
@@ -750,6 +836,12 @@ export default function GiveawayHome() {
                         className="card-product-img"
                         loading="lazy"
                       />
+
+                      {/* Prominent Floating Countdown Badge on Stage */}
+                      <div className="card-stage-countdown-badge">
+                        <Clock size={11} className="clock-tick-icon" />
+                        <span>{prize.daysLeft || 12}d left</span>
+                      </div>
                     </div>
 
                     {/* Card Content & Metrics */}
@@ -765,19 +857,19 @@ export default function GiveawayHome() {
                         {prize.spec}
                       </p>
 
-                      {/* Social Metrics: Participants & Days Left */}
+                      {/* Social Metrics: Participants & Winners Count */}
                       <div className="card-meta-chips-row">
                         <span className="meta-chip participants">
                           <Users size={11} />
-                          <span>{prize.participants || "8.5K"}</span>
+                          <span>{prize.participants || "8.5K"} entries</span>
                         </span>
-                        <span className="meta-chip time-left">
-                          <Clock size={11} />
-                          <span>{prize.daysLeft || 12}d left</span>
+                        <span className="meta-chip winners-count">
+                          <Trophy size={11} />
+                          <span>{prize.winnerCount || 1} Winner{(prize.winnerCount || 1) > 1 ? "s" : ""}</span>
                         </span>
                       </div>
 
-                      {/* Entries Progress Bar */}
+                      {/* Animated Entries Progress Bar */}
                       <div className="card-entry-progress-wrap">
                         <div className="progress-labels-mini">
                           <span className="card-entry-text">
@@ -789,7 +881,7 @@ export default function GiveawayHome() {
                         </div>
                         <div className="card-progress-track">
                           <div
-                            className="card-progress-fill"
+                            className="card-progress-fill animated-shimmer"
                             style={{ width: `${prize.progressPercent || 45}%` }}
                           />
                         </div>
@@ -807,7 +899,7 @@ export default function GiveawayHome() {
                           </>
                         ) : (
                           <>
-                            <span>Join Now</span>
+                            <span>Join Giveaway</span>
                             <ArrowRight size={13} />
                           </>
                         )}
@@ -836,68 +928,127 @@ export default function GiveawayHome() {
             </div>
           </div>
 
-          {/* 2. RECENT WINNERS CARD */}
+          {/* 2. RECENT WINNERS CARD (LARGER IMAGES & RICH HIERARCHY) */}
           <div className="recent-winners-dashboard-card">
             <div className="recent-winners-header">
               <div className="winners-title-left">
                 <div className="winners-title-row">
-                  <Crown size={16} className="crown-gold" />
+                  <Crown size={18} className="crown-gold" />
                   <h3>Recent Winners</h3>
+                  <span className="winners-live-pill">LIVE PROOFS</span>
                 </div>
-                <p>Real people, real rewards. Be the next winner!</p>
+                <p>Real winners, verified rewards. Draw proofs published instantly.</p>
               </div>
 
               <button
                 className="view-winners-link-btn"
                 onClick={() => navigateToRoute("trust")}
               >
-                <span>View All Winners</span>
+                <span>Audit Trail</span>
                 <ArrowRight size={12} />
               </button>
             </div>
 
-            {/* 4 Winners Mini Cards in a Row */}
-            <div className="recent-winners-row-grid">
+            {/* 4 Winners Showcase Cards with larger images & information hierarchy */}
+            <div className="recent-winners-showcase-grid">
               {recentWinners.map((w) => (
-                <div key={w.id} className="winner-mini-card">
-                  <div className="winner-img-thumb-wrap">
-                    <img src={w.image} alt={w.prize} className="winner-prize-thumb" />
+                <article key={w.id} className="winner-showcase-card">
+                  {/* Top Badge: Verified Tag & Time */}
+                  <div className="winner-card-header">
+                    <span className="winner-verified-chip">
+                      <CheckCircle2 size={10} /> Verified
+                    </span>
+                    <span className="winner-time-badge">{w.time}</span>
                   </div>
-                  <div className="winner-mini-info">
-                    <strong className="winner-name">{w.name}</strong>
-                    <span className="winner-prize-txt">{w.prize}</span>
-                    <small className="winner-time-txt">{w.time}</small>
+
+                  {/* Product Stage with Glow */}
+                  <div className="winner-product-stage">
+                    <div className="winner-stage-radial-glow" />
+                    <img src={w.image} alt={w.prize} className="winner-product-img" />
+                    <span className="winner-prize-val-tag">{w.value}</span>
                   </div>
-                </div>
+
+                  {/* Winner Information Hierarchy */}
+                  <div className="winner-info-body">
+                    <div className="winner-person-row">
+                      <div className="winner-avatar-initial">
+                        {w.name.charAt(0)}
+                      </div>
+                      <div className="winner-name-location">
+                        <strong className="winner-person-name">{w.name}</strong>
+                        <span className="winner-location-txt">{w.location}</span>
+                      </div>
+                    </div>
+
+                    <div className="winner-prize-details">
+                      <h4 className="winner-prize-title">{w.prize}</h4>
+                      <p className="winner-prize-spec-txt">{w.prizeSpec}</p>
+                    </div>
+
+                    <div className="winner-card-bottom-proof">
+                      <span className="winner-proof-id">{w.ticketId}</span>
+                      <span className="winner-status-delivered">{w.status}</span>
+                    </div>
+                  </div>
+                </article>
               ))}
             </div>
           </div>
 
           {/* 3. CALLOUT BANNER: Join Thousands of Winners Today! */}
           <div className="join-winners-callout-card">
-            <div className="callout-left-content">
-              <div className="callout-trophy-circle">
-                <Trophy size={20} />
+            {/* Ambient Background Cosmic Nebulas */}
+            <div className="callout-cosmic-glow glow-left" />
+            <div className="callout-cosmic-glow glow-right" />
+            <div className="callout-cyber-grid-overlay" aria-hidden="true" />
+
+            <div className="callout-inner-flex">
+              <div className="callout-left-content">
+                {/* 3D Glowing Trophy Showcase Stage */}
+                <div className="callout-trophy-showcase">
+                  <div className="trophy-pulse-halo" />
+                  <div className="trophy-stage-disc" />
+                  <div className="trophy-gold-symbol">
+                    <Trophy size={28} className="trophy-3d-icon" />
+                  </div>
+                  <span className="sparkle-star s1">✦</span>
+                  <span className="sparkle-star s2">✦</span>
+                </div>
+
+                <div className="callout-text-box">
+                  <div className="callout-hot-badge">
+                    <Sparkles size={11} />
+                    <span>OVER ₹25 LAKHS+ REWARDS DISTRIBUTED</span>
+                  </div>
+                  <h3>Join Thousands of Winners Today!</h3>
+                  <p>Complete simple daily tasks, earn entries and get a chance to win verified prizes from VELoop Rewards.</p>
+                  
+                  {/* 3 Value Perks */}
+                  <div className="callout-perks-row">
+                    <span className="callout-perk-item">⚡ 100% Free Entry</span>
+                    <span className="callout-perk-item">🎁 Sealed Brand Prizes</span>
+                    <span className="callout-perk-item">🛡️ Direct Home Delivery</span>
+                  </div>
+                </div>
               </div>
-              <div className="callout-text-box">
-                <h3>Join Thousands of Winners Today!</h3>
-                <p>Complete tasks, earn entries and get a chance to win amazing rewards.</p>
+
+              <div className="callout-right-action">
+                <button
+                  className="callout-start-now-btn"
+                  onClick={() => {
+                    if (!currentUser.isLoggedIn) {
+                      setIsLoginModalOpen(true);
+                    } else {
+                      navigateToRoute("earn");
+                    }
+                  }}
+                >
+                  <span>Start Winning Now</span>
+                  <ArrowRight size={15} />
+                </button>
+                <span className="callout-subtext">No deposit required • Free to play</span>
               </div>
             </div>
-
-            <button
-              className="callout-start-now-btn"
-              onClick={() => {
-                if (!currentUser.isLoggedIn) {
-                  setIsLoginModalOpen(true);
-                } else {
-                  navigateToRoute("earn");
-                }
-              }}
-            >
-              <span>Start Now</span>
-              <ArrowRight size={14} />
-            </button>
           </div>
 
           {/* 4. FREQUENTLY ASKED QUESTIONS */}
@@ -905,17 +1056,18 @@ export default function GiveawayHome() {
             <div className="faqs-card-header">
               <div className="faqs-title-left">
                 <div className="faqs-title-row">
-                  <HelpCircle size={16} className="faq-blue-icon" />
+                  <HelpCircle size={18} className="faq-blue-icon" />
                   <h3>Frequently Asked Questions</h3>
+                  <span className="faq-count-badge">4 TOP ANSWERS</span>
                 </div>
-                <p>Everything you need to know about VELOOP Rewards.</p>
+                <p>Everything you need to know about VELoop Rewards & prize distribution.</p>
               </div>
 
               <button
                 className="view-faqs-link-btn"
                 onClick={() => setIsRulesModalOpen(true)}
               >
-                <span>View All FAQs</span>
+                <span>Platform Rules</span>
                 <ArrowRight size={12} />
               </button>
             </div>
@@ -930,16 +1082,20 @@ export default function GiveawayHome() {
                     onClick={() => setOpenFaqIndex(isOpen ? -1 : idx)}
                   >
                     <div className="faq-question-row">
-                      <span className="faq-question-text">{faq.q}</span>
-                      <span className="faq-toggle-icon">
+                      <div className="faq-q-left">
+                        <span className="faq-category-tag">{faq.category}</span>
+                        <span className="faq-question-text">{faq.q}</span>
+                      </div>
+                      <span className={`faq-toggle-circle ${isOpen ? "is-open" : ""}`}>
                         {isOpen ? <Minus size={14} /> : <Plus size={14} />}
                       </span>
                     </div>
-                    {isOpen && (
+
+                    <div className={`faq-collapsible-wrapper ${isOpen ? "expanded" : ""}`}>
                       <div className="faq-answer-box">
                         <p>{faq.a}</p>
                       </div>
-                    )}
+                    </div>
                   </div>
                 );
               })}
