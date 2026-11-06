@@ -9,11 +9,6 @@ import {
   Users,
   Trophy,
   ShieldCheck,
-  Headphones,
-  CreditCard,
-  Coins,
-  Gamepad2,
-  MoreHorizontal,
   Star,
   Cpu,
   HardDrive,
@@ -21,7 +16,7 @@ import {
   Radio,
   Heart,
   UserCheck,
-  CheckCircle2,
+  Check,
   HelpCircle,
   Plus,
   Minus,
@@ -31,9 +26,9 @@ import {
   Clock,
   Sparkles,
   Zap,
-  Check,
-  Globe,
-  Award
+  Layers,
+  Gamepad2,
+  MoreHorizontal
 } from "lucide-react";
 import "./GiveawayHome.css";
 
@@ -44,16 +39,18 @@ export default function GiveawayHome() {
     setConfirmPrize,
     setIsLoginModalOpen,
     setIsRulesModalOpen,
+    setIsGiveawayCodeModalOpen,
+    setIsClaimModalOpen,
     navigateToGiveaway,
     navigateToRoute,
     showToast
   } = useGiveaway();
 
-  // Active Category State: ALL | tech | vouchers | instant | gaming
+  // Active Category State
   const [activeCategory, setActiveCategory] = useState("ALL");
   const [showAllPrizes, setShowAllPrizes] = useState(false);
 
-  // Likes state for reward cards
+  // Favorites state for reward cards
   const [likedCardIds, setLikedCardIds] = useState(new Set());
 
   // Horizontal Carousel Reference & Navigation State
@@ -69,7 +66,7 @@ export default function GiveawayHome() {
       setCanScrollLeft(scrollLeft > 15);
       setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 15);
 
-      const cardWidth = 296; // card (280) + gap (16)
+      const cardWidth = 285;
       const idx = Math.round(scrollLeft / cardWidth);
       setCarouselIndex(Math.min(Math.max(0, idx), displayedCards.length - 1));
     }
@@ -146,14 +143,14 @@ export default function GiveawayHome() {
     setConfirmPrize(prize);
   };
 
-  // Category filter tabs matching media_1793407830512_ba630f92.jpg
+  // Category filter tabs matching Reference Mockup
   const categories = [
-    { id: "ALL", label: "All Giveaways", sublabel: "12 Active", icon: <Gift size={16} /> },
-    { id: "tech", label: "Tech & Gadgets", sublabel: "4 Giveaways", icon: <Headphones size={16} /> },
-    { id: "vouchers", label: "Gift Cards", sublabel: "5 Giveaways", icon: <CreditCard size={16} /> },
-    { id: "tokens", label: "UPI & Tokens", sublabel: "3 Giveaways", icon: <Coins size={16} /> },
-    { id: "gaming", label: "Gaming", sublabel: "2 Giveaways", icon: <Gamepad2 size={16} /> },
-    { id: "more", label: "More", sublabel: "Explore", icon: <MoreHorizontal size={16} /> }
+    { id: "ALL", label: "All Giveaways", count: 12, sublabel: "12 Active", icon: <Layers size={14} /> },
+    { id: "tech", label: "Tech & Gadgets", count: 4, sublabel: "4 Giveaways", icon: <Sparkles size={14} /> },
+    { id: "vouchers", label: "Gift Cards", count: 5, sublabel: "5 Giveaways", icon: <Gift size={14} /> },
+    { id: "tokens", label: "UPI & Tokens", count: 3, sublabel: "3 Giveaways", icon: <Zap size={14} /> },
+    { id: "gaming", label: "Gaming", count: 2, sublabel: "2 Giveaways", icon: <Gamepad2 size={14} /> },
+    { id: "more", label: "More", count: null, sublabel: "Explore", icon: <MoreHorizontal size={14} /> }
   ];
 
   // All prizes from giveawayData
@@ -169,7 +166,7 @@ export default function GiveawayHome() {
     return true;
   });
 
-  // Display top 6 prizes matching reference image grid, or all when expanded
+  // Display top 6 prizes matching reference 2x3 grid, or all when expanded
   const displayedCards = showAllPrizes ? filteredPrizes : filteredPrizes.slice(0, 6);
 
   // Reset carousel scroll when category or view mode changes
@@ -182,175 +179,187 @@ export default function GiveawayHome() {
     }
   }, [activeCategory, showAllPrizes]);
 
-  // How It Works - 4 Connected Steps with Numbering & Enhanced Visuals
+  // How It Works - Clean 4 Steps (Minimal text, bold visuals)
   const howSteps = [
     {
-      step: "01",
-      badge: "STEP 01",
-      icon: <UserCheck size={20} />,
+      num: 1,
+      icon: <UserCheck size={22} />,
       color: "purple",
       title: "Create Account",
-      subtitle: "Instant & Free",
-      desc: "Sign up in 30 seconds and receive 100 Welcome VEs automatically."
+      subtitle: "Sign up for free"
     },
     {
-      step: "02",
-      badge: "STEP 02",
-      icon: <CheckCircle2 size={20} />,
+      num: 2,
+      icon: <Check size={22} />,
       color: "blue",
       title: "Complete Tasks",
-      subtitle: "Daily Fun",
-      desc: "Try new games, complete surveys, or check in daily to collect points."
+      subtitle: "Do simple tasks"
     },
     {
-      step: "03",
-      badge: "STEP 03",
-      icon: <Gift size={20} />,
+      num: 3,
+      icon: <Gift size={22} />,
       color: "pink",
       title: "Earn Entries",
-      subtitle: "Multiple Chances",
-      desc: "Use your VEs to get tickets for gadgets, consoles & gift cards."
+      subtitle: "Get more entries"
     },
     {
-      step: "04",
-      badge: "STEP 04",
-      icon: <Trophy size={20} />,
+      num: 4,
+      icon: <Trophy size={22} />,
       color: "gold",
       title: "Win Rewards",
-      subtitle: "Doorstep Delivery",
-      desc: "Winners drawn live on-chain with free, insured brand warranty shipping."
+      subtitle: "Be a lucky winner!"
     }
   ];
 
-  // Trusted by Thousands - 4 Premium Feature Cards
+  // Trusted by Thousands - 4 Clean Trust Items
   const trustFeatures = [
     {
       id: "t1",
-      icon: <ShieldCheck size={22} />,
       color: "green",
-      badge: "100% SECURE",
-      title: "Bank-Grade Encryption",
-      desc: "Military-grade 256-bit SSL encryption protects your account and data privacy."
+      title: "100% Secure",
+      sub: "Your data is safe"
     },
     {
       id: "t2",
-      icon: <Sparkles size={22} />,
       color: "purple",
-      badge: "PROVABLY FAIR",
-      title: "Verifiable Draws",
-      desc: "Cryptographic RNG seeds guarantee 100% tamper-proof winner selection."
+      title: "Fair & Transparent",
+      sub: "Winners are real"
     },
     {
       id: "t3",
-      icon: <Award size={22} />,
-      color: "gold",
-      badge: "OFFICIAL PRIZES",
-      title: "Real Brand Rewards",
-      desc: "Sealed authentic products with full manufacturer brand warranty & fast dispatch."
+      color: "yellow",
+      title: "Real Rewards",
+      sub: "No fake prizes"
     },
     {
       id: "t4",
-      icon: <Globe size={22} />,
       color: "blue",
-      badge: "WORLDWIDE",
       title: "Global Community",
-      desc: "Active community of 100,000+ members enjoying transparent weekly rewards."
+      sub: "Join thousands"
     }
   ];
 
-  // Recent Winners with rich information hierarchy & larger visuals
+  // Recent Winners - Clean Visuals
   const recentWinners = [
     {
       id: "w1",
       name: "Rahul S.",
-      location: "Delhi, IN",
-      prize: "iPhone 15 Pro",
-      prizeSpec: "128GB Titanium",
-      value: "₹1,19,900",
+      won: "Won iPhone 15",
       time: "2 days ago",
-      image: "/assets/iphone.png",
-      status: "Delivered ✓",
-      ticketId: "#VR-8842"
+      image: "/assets/iphone.png"
     },
     {
       id: "w2",
       name: "Priya M.",
-      location: "Mumbai, IN",
-      prize: "Apple Watch Series 9",
-      prizeSpec: "GPS 45mm",
-      value: "₹41,900",
+      won: "Won Apple Watch",
       time: "1 week ago",
-      image: "/assets/watch.png",
-      status: "Delivered ✓",
-      ticketId: "#VR-7731"
+      image: "/assets/watch.png"
     },
     {
       id: "w3",
       name: "Aman K.",
-      location: "Bangalore, IN",
-      prize: "AirPods Pro 2",
-      prizeSpec: "Active Noise Cancel",
-      value: "₹24,900",
+      won: "Won AirPods Pro",
       time: "2 weeks ago",
-      image: "/assets/airpod.png",
-      status: "Delivered ✓",
-      ticketId: "#VR-6619"
+      image: "/assets/airpod.png"
     },
     {
       id: "w4",
       name: "Sneha T.",
-      location: "Pune, IN",
-      prize: "Amazon Gift Card",
-      prizeSpec: "₹2,000 Digital Code",
-      value: "₹2,000",
+      won: "Won Amazon Gift Card",
       time: "3 weeks ago",
-      image: "/assets/amazon card.png",
-      status: "Claimed ✓",
-      ticketId: "#VR-5502"
+      image: "/assets/amazon card.png"
     }
   ];
 
-  // FAQs data with category tags
+  // FAQs data - Clean and direct
   const faqs = [
     {
       q: "How do I participate in a giveaway?",
-      a: "Select your desired giveaway, complete simple tasks or use your VEs/SVEs entries to register. Each entry increases your winning chances!",
-      category: "Participation"
+      a: "Select your desired giveaway, complete simple tasks or use your VEs/SVEs entries to register. Each entry increases your winning chances!"
     },
     {
-      q: "Are the rewards real and authentic?",
-      a: "Yes, 100%! All physical rewards are brand-sealed with official manufacturer warranty. Digital vouchers are delivered directly to your verified email within minutes.",
-      category: "Rewards"
+      q: "Are the rewards real?",
+      a: "Yes, 100%! All physical rewards are brand-sealed with official manufacturer warranty. Digital vouchers are delivered directly to your verified email within minutes."
     },
     {
-      q: "Is it completely free to join?",
-      a: "Absolutely! You can earn VEs and Super VEs for free by completing daily check-ins, app trials, mini-games, and community engagement tasks with zero deposit required.",
-      category: "Cost & VEs"
+      q: "Is it free to join?",
+      a: "Absolutely! You can earn VEs and Super VEs for free by completing daily check-ins, app trials, mini-games, and community engagement tasks with zero deposit required."
     },
     {
-      q: "How are winners selected fairly?",
-      a: "Winners are drawn using cryptographically verifiable random seeds on our smart lottery engine once the countdown expires. All draw proofs are permanently archived.",
-      category: "Fairness"
+      q: "How are winners selected?",
+      a: "Winners are drawn using cryptographically verifiable random seeds on our smart lottery engine once the countdown expires. All draw proofs are permanently archived."
     }
   ];
 
   return (
     <div className="giveaway-dashboard-layout">
+      {/* Certified Winner Banner (Displays if user is a certified winner) */}
+      {currentUser?.wonPrize && (
+        <div className="winner-spotlight-top-banner">
+          <div className="winner-banner-left">
+            <div className="winner-trophy-gold-box">
+              <Trophy size={24} />
+            </div>
+            <div className="winner-banner-texts">
+              <span className="winner-banner-kicker">🎉 CONGRATULATIONS! YOU WON!</span>
+              <h2 className="winner-banner-title">{currentUser.wonPrize.prizeName}</h2>
+              <p className="winner-banner-desc">
+                Your ticket was drawn as an official certified winner in the VELOOP Rewards Giveaway!
+              </p>
+              <div className="winner-banner-chips">
+                <span className="winner-chip time">
+                  <Clock size={12} /> Claim within {currentUser.wonPrize.deadline || "7 Days Remaining"}
+                </span>
+                <span className="winner-chip verified">
+                  <ShieldCheck size={12} /> Verified Winner Status
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div className="winner-banner-center-img">
+            <img src={currentUser.wonPrize.image} alt={currentUser.wonPrize.prizeName} />
+          </div>
+
+          <div className="winner-banner-right-action">
+            <button
+              className="winner-claim-gold-btn"
+              onClick={() => setIsClaimModalOpen(true)}
+            >
+              <Gift size={15} />
+              <span>Claim Your Prize</span>
+              <ArrowRight size={15} />
+            </button>
+          </div>
+        </div>
+      )}
+
       <div className="dashboard-main-container">
         {/* ======================================================== */}
-        {/* LEFT COLUMN: HERO, STATS, CATEGORIES, FEATURED, HOW, TRUST*/}
+        {/* LEFT COLUMN (Desktop): HERO, STATS, CATEGORIES, FEATURED, HOW, TRUST */}
+        {/* On Mobile: Elements are interleaved cleanly via CSS flex order */}
         {/* ======================================================== */}
         <section className="dashboard-left-col" aria-label="Main Giveaway Showcase">
           {/* 1. HERO SHOWCASE CARD */}
           <div className="hero-showcase-card">
             <div className="hero-card-left">
-              <div className="hero-exclusive-badge">
-                <Flame size={13} className="flame-icon" />
-                <span>EXCLUSIVE GIVEAWAYS</span>
+              <div className="hero-badge-group">
+                <span className="hero-exclusive-badge">
+                  <Flame size={13} className="flame-icon" />
+                  <span>EXCLUSIVE GIVEAWAYS</span>
+                </span>
+                <button
+                  className="hero-giveaway-code-btn"
+                  onClick={() => setIsGiveawayCodeModalOpen(true)}
+                  title="Redeem Promo Code"
+                >
+                  <Gift size={13} />
+                  <span>Giveaway Code</span>
+                </button>
               </div>
 
               <h1 className="hero-win-headline">
-                Win Amazing Rewards with <span className="pink-gradient-text">VELOOP Rewards</span>
+                Win Amazing Rewards with <span className="pink-gradient-text">VELoop Rewards</span>
               </h1>
 
               <p className="hero-win-description">
@@ -489,7 +498,7 @@ export default function GiveawayHome() {
             </div>
           </div>
 
-          {/* 3. CATEGORY FILTER TABS BAR */}
+          {/* 3. CATEGORY FILTER TABS BAR (Image 2 style) */}
           <div className="category-filter-tabs-bar" role="tablist" aria-label="Giveaway Categories">
             {categories.map((cat) => {
               const isActive = activeCategory === cat.id;
@@ -505,10 +514,12 @@ export default function GiveawayHome() {
                   aria-selected={isActive}
                 >
                   <span className="cat-icon-wrap">{cat.icon}</span>
-                  <div className="cat-text-wrap">
-                    <span className="cat-primary-title">{cat.label}</span>
-                    <span className="cat-count-sub">{cat.sublabel}</span>
-                  </div>
+                  <span className="cat-primary-title">{cat.label}</span>
+                  {cat.count !== null && (
+                    <span className={`cat-count-pill ${isActive ? "active-pill" : ""}`}>
+                      {cat.count}
+                    </span>
+                  )}
                 </button>
               );
             })}
@@ -626,85 +637,51 @@ export default function GiveawayHome() {
             </div>
           </div>
 
-          {/* 5. HOW IT WORKS? SECTION (CONNECTED ROADMAP WITH NUMBERING) */}
+          {/* 5. HOW IT WORKS? SECTION (Clean 4 Cards, minimal text matching Reference Mockup) */}
           <div className="how-it-works-dashboard-card" id="how-it-works-section">
             <div className="how-card-header">
               <div className="how-shield-icon">
                 <ShieldCheck size={20} />
               </div>
               <div className="how-title-box">
-                <div className="how-title-line">
-                  <h3>How It Works</h3>
-                  <span className="how-badge-pill">4 SIMPLE STEPS</span>
-                </div>
-                <p>Follow these quick steps and start winning verified rewards today.</p>
+                <h3>How It Works?</h3>
+                <p>It's simple! Follow these steps and start winning amazing rewards.</p>
               </div>
             </div>
 
-            {/* Connected Steps Pathway */}
-            <div className="how-connected-track-container">
-              {/* Laser Connector Line */}
-              <div className="how-connecting-laser-line" aria-hidden="true" />
-
-              <div className="how-connected-steps-grid">
-                {howSteps.map((s) => (
-                  <div key={s.step} className={`how-step-card step-${s.color}`}>
-                    {/* Top Row: Futuristic Step Number Badge & Watermark */}
-                    <div className="step-card-top">
-                      <span className={`step-pill-badge ${s.color}`}>{s.badge}</span>
-                      <span className="step-number-watermark">{s.step}</span>
-                    </div>
-
-                    {/* Glowing Icon Hub */}
-                    <div className={`step-icon-stage ${s.color}`}>
-                      <div className="step-stage-glow" />
-                      <div className="step-icon-symbol">{s.icon}</div>
-                    </div>
-
-                    {/* Step Content */}
-                    <div className="step-content-box">
-                      <h4 className="step-title">{s.title}</h4>
-                      <span className="step-subtitle-tag">{s.subtitle}</span>
-                      <p className="step-desc-text">{s.desc}</p>
-                    </div>
-
-                    {/* Bottom Connecting Node Dot */}
-                    <div className="step-card-footer-node">
-                      <span className={`node-dot ${s.color}`} />
-                    </div>
+            <div className="how-clean-cards-grid">
+              {howSteps.map((s) => (
+                <div key={s.num} className="how-clean-step-card">
+                  <div className={`how-step-circle-icon ${s.color}`}>
+                    {s.icon}
                   </div>
-                ))}
-              </div>
+                  <h4 className="how-step-title">{s.title}</h4>
+                  <span className="how-step-subtitle">{s.subtitle}</span>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* 6. TRUSTED BY THOUSANDS (PREMIUM FEATURE CARDS) */}
+          {/* 6. TRUSTED BY THOUSANDS (Clean 4 Trust Badges matching Reference Mockup) */}
           <div className="trusted-by-thousands-bar">
             <div className="trust-bar-header">
               <div className="trust-shield-glow">
-                <ShieldCheck size={22} className="trust-green-shield" />
+                <ShieldCheck size={20} className="trust-green-shield" />
               </div>
               <div className="trust-header-text">
-                <div className="trust-title-row">
-                  <h3>Trusted by Thousands</h3>
-                  <span className="trust-guarantee-badge">100% VERIFIED PLATFORM</span>
-                </div>
-                <p>Industry-standard security, provably fair transparency, and authentic brand partnerships.</p>
+                <h3>Trusted by Thousands</h3>
+                <p>A safe, secure and trusted platform for giveaways.</p>
               </div>
             </div>
 
-            {/* 4 Premium Feature Cards */}
-            <div className="trust-premium-cards-grid">
+            <div className="trust-clean-badges-grid">
               {trustFeatures.map((feat) => (
-                <div key={feat.id} className={`trust-feature-card ${feat.color}`}>
-                  <div className="trust-card-top">
-                    <div className={`trust-icon-box ${feat.color}`}>
-                      {feat.icon}
-                    </div>
-                    <span className={`trust-mini-tag ${feat.color}`}>{feat.badge}</span>
+                <div key={feat.id} className="trust-clean-pill-item">
+                  <span className={`trust-dot-indicator ${feat.color}`} />
+                  <div className="trust-pill-text-col">
+                    <strong className="trust-pill-main">{feat.title}</strong>
+                    <span className="trust-pill-sub">{feat.sub}</span>
                   </div>
-                  <h4 className="trust-card-title">{feat.title}</h4>
-                  <p className="trust-card-desc">{feat.desc}</p>
                 </div>
               ))}
             </div>
@@ -712,10 +689,10 @@ export default function GiveawayHome() {
         </section>
 
         {/* ======================================================== */}
-        {/* RIGHT COLUMN: ACTIVE GIVEAWAYS, RECENT WINNERS, CTA, FAQ */}
+        {/* RIGHT COLUMN (Desktop): ACTIVE GIVEAWAYS, RECENT WINNERS, CTA, FAQ */}
         {/* ======================================================== */}
         <aside className="dashboard-right-col" aria-label="Active Giveaways and Community Feed">
-          {/* 1. ACTIVE GIVEAWAYS SECTION (HORIZONTAL SCROLLING CAROUSEL) */}
+          {/* 1. ACTIVE GIVEAWAYS SECTION (2-Column Grid on Desktop, Swipe Carousel on Mobile) */}
           <div className="active-giveaways-container" id="active-giveaways-section">
             <div className="active-section-header">
               <div className="active-header-left">
@@ -734,8 +711,7 @@ export default function GiveawayHome() {
                     className={`carousel-arrow-btn prev ${!canScrollLeft ? "disabled" : ""}`}
                     onClick={() => scrollCarousel("left")}
                     disabled={!canScrollLeft}
-                    aria-label="Previous Prize Card"
-                    title="Previous Prize"
+                    aria-label="Previous Prize"
                   >
                     <ChevronLeft size={16} />
                   </button>
@@ -743,8 +719,7 @@ export default function GiveawayHome() {
                     className={`carousel-arrow-btn next ${!canScrollRight ? "disabled" : ""}`}
                     onClick={() => scrollCarousel("right")}
                     disabled={!canScrollRight}
-                    aria-label="Next Prize Card"
-                    title="Next Prize"
+                    aria-label="Next Prize"
                   >
                     <ChevronRight size={16} />
                   </button>
@@ -760,60 +735,30 @@ export default function GiveawayHome() {
               </div>
             </div>
 
-            {/* Horizontal Scrolling Carousel Track */}
+            {/* Giveaway Cards Grid & Carousel */}
             <div
               className="active-cards-carousel"
               ref={carouselRef}
               onScroll={handleCarouselScroll}
               role="region"
-              aria-label="Active Giveaways Carousel"
+              aria-label="Active Giveaways Cards"
               tabIndex={0}
             >
               {displayedCards.map((prize) => {
                 const isJoined = joinedPrizes.has(prize.id);
                 const isLiked = likedCardIds.has(prize.id);
 
-                // Specific theme per prize
-                const themeClass =
-                  prize.slug.includes("iphone")
-                    ? "theme-iphone"
-                    : prize.slug.includes("watch")
-                    ? "theme-watch"
-                    : prize.slug.includes("airpod")
-                    ? "theme-airpod"
-                    : prize.slug.includes("amazon")
-                    ? "theme-amazon"
-                    : prize.slug.includes("flipkart")
-                    ? "theme-flipkart"
-                    : prize.slug.includes("ps5") || prize.slug.includes("playstation")
-                    ? "theme-ps5"
-                    : `theme-${prize.color || "purple"}`;
-
                 return (
                   <article
                     key={prize.id}
-                    className={`active-prize-card ${themeClass} ${isJoined ? "joined" : ""}`}
+                    className={`active-prize-card ${isJoined ? "joined" : ""}`}
                     onClick={() => navigateToGiveaway(prize.slug)}
                   >
-                    {/* Top Row: Prize Badge + Cost Chip + Heart Likes */}
+                    {/* Top Row: Prize Badge + Like Counter / Cost */}
                     <div className="card-top-header">
-                      <div className="card-badge-group">
-                        <span className={`position-badge ${prize.color || "purple"}`}>
-                          {prize.slug.includes("ps5") ? (
-                            <Gamepad2 size={11} />
-                          ) : prize.position === "1ST PRIZE" ? (
-                            <Crown size={11} />
-                          ) : (
-                            <Sparkles size={11} />
-                          )}
-                          <span>{prize.position}</span>
-                        </span>
-
-                        <span className="card-cost-chip" title={`Entry fee: ${prize.entryFee} ${prize.currency}`}>
-                          <Zap size={10} className="zap-icon" />
-                          <span>{prize.entryFee} {prize.currency}</span>
-                        </span>
-                      </div>
+                      <span className={`position-badge ${prize.color || "purple"}`}>
+                        {prize.position}
+                      </span>
 
                       <button
                         className={`card-heart-btn ${isLiked ? "liked" : ""}`}
@@ -821,12 +766,12 @@ export default function GiveawayHome() {
                         aria-label={`Like ${prize.name}`}
                         title="Add to favorites"
                       >
-                        <Heart size={12} fill={isLiked ? "#ec4899" : "none"} />
+                        <Heart size={12} fill={isLiked ? "#ec4899" : "#a855f7"} color={isLiked ? "#ec4899" : "#a855f7"} />
                         <span>{prize.likes || "12.3K"}</span>
                       </button>
                     </div>
 
-                    {/* 3D Product Stage with Larger Visuals, Glowing Neon Pedestal, and Countdown Badge */}
+                    {/* Centered Product Stage with Subtle Radial Glow */}
                     <div className="card-image-stage">
                       <div className={`stage-radial-glow ${prize.color || "purple"}`} />
                       <div className="stage-pedestal-ellipse" />
@@ -836,15 +781,9 @@ export default function GiveawayHome() {
                         className="card-product-img"
                         loading="lazy"
                       />
-
-                      {/* Prominent Floating Countdown Badge on Stage */}
-                      <div className="card-stage-countdown-badge">
-                        <Clock size={11} className="clock-tick-icon" />
-                        <span>{prize.daysLeft || 12}d left</span>
-                      </div>
                     </div>
 
-                    {/* Card Content & Metrics */}
+                    {/* Product Name, Value, Spec & Progress */}
                     <div className="card-details-box">
                       <div className="card-name-val-row">
                         <h3 className="card-product-name" title={prize.name}>
@@ -857,37 +796,22 @@ export default function GiveawayHome() {
                         {prize.spec}
                       </p>
 
-                      {/* Social Metrics: Participants & Winners Count */}
-                      <div className="card-meta-chips-row">
-                        <span className="meta-chip participants">
-                          <Users size={11} />
-                          <span>{prize.participants || "8.5K"} entries</span>
-                        </span>
-                        <span className="meta-chip winners-count">
-                          <Trophy size={11} />
-                          <span>{prize.winnerCount || 1} Winner{(prize.winnerCount || 1) > 1 ? "s" : ""}</span>
-                        </span>
-                      </div>
-
-                      {/* Animated Entries Progress Bar */}
+                      {/* Entries Progress Bar */}
                       <div className="card-entry-progress-wrap">
                         <div className="progress-labels-mini">
                           <span className="card-entry-text">
                             {prize.entriesProgress || "12.3K / 25K Entries"}
                           </span>
-                          <span className="progress-pct-text">
-                            {prize.progressPercent || 45}%
-                          </span>
                         </div>
                         <div className="card-progress-track">
                           <div
-                            className="card-progress-fill animated-shimmer"
+                            className="card-progress-fill"
                             style={{ width: `${prize.progressPercent || 45}%` }}
                           />
                         </div>
                       </div>
 
-                      {/* Vibrant CTA Join Button */}
+                      {/* Join Action Button */}
                       <button
                         className={`card-join-cta-btn ${isJoined ? "is-joined" : ""}`}
                         onClick={(e) => handleJoinClick(e, prize)}
@@ -899,7 +823,7 @@ export default function GiveawayHome() {
                           </>
                         ) : (
                           <>
-                            <span>Join Giveaway</span>
+                            <span>Join Now</span>
                             <ArrowRight size={13} />
                           </>
                         )}
@@ -910,7 +834,7 @@ export default function GiveawayHome() {
               })}
             </div>
 
-            {/* Carousel Pagination Dots & Navigation Indicators */}
+            {/* Mobile Carousel Indicators */}
             <div className="carousel-pagination-row">
               <div className="carousel-dots-list" aria-label="Carousel pagination dots">
                 {displayedCards.map((p, dotIdx) => (
@@ -918,136 +842,74 @@ export default function GiveawayHome() {
                     key={p.id || dotIdx}
                     className={`carousel-dot ${dotIdx === carouselIndex ? "active" : ""}`}
                     onClick={() => scrollToIndex(dotIdx)}
-                    aria-label={`Go to slide ${dotIdx + 1} (${p.name})`}
+                    aria-label={`Go to slide ${dotIdx + 1}`}
                   />
                 ))}
-              </div>
-              <div className="carousel-counter-text">
-                <span>Swipe or use arrows to view all <strong>{displayedCards.length}</strong> rewards</span>
               </div>
             </div>
           </div>
 
-          {/* 2. RECENT WINNERS CARD (LARGER IMAGES & RICH HIERARCHY) */}
+          {/* 2. RECENT WINNERS (Clean 4 Cards matching Reference Mockup) */}
           <div className="recent-winners-dashboard-card">
             <div className="recent-winners-header">
               <div className="winners-title-left">
                 <div className="winners-title-row">
                   <Crown size={18} className="crown-gold" />
                   <h3>Recent Winners</h3>
-                  <span className="winners-live-pill">LIVE PROOFS</span>
                 </div>
-                <p>Real winners, verified rewards. Draw proofs published instantly.</p>
+                <p>Real people, real rewards. Be the next winner!</p>
               </div>
 
               <button
                 className="view-winners-link-btn"
                 onClick={() => navigateToRoute("trust")}
               >
-                <span>Audit Trail</span>
+                <span>View All Winners</span>
                 <ArrowRight size={12} />
               </button>
             </div>
 
-            {/* 4 Winners Showcase Cards with larger images & information hierarchy */}
-            <div className="recent-winners-showcase-grid">
+            {/* 4 Clean Winner Cards */}
+            <div className="recent-winners-clean-grid">
               {recentWinners.map((w) => (
-                <article key={w.id} className="winner-showcase-card">
-                  {/* Top Badge: Verified Tag & Time */}
-                  <div className="winner-card-header">
-                    <span className="winner-verified-chip">
-                      <CheckCircle2 size={10} /> Verified
-                    </span>
-                    <span className="winner-time-badge">{w.time}</span>
+                <article key={w.id} className="winner-clean-card">
+                  <div className="winner-thumb-box">
+                    <img src={w.image} alt={w.won} className="winner-clean-img" />
                   </div>
-
-                  {/* Product Stage with Glow */}
-                  <div className="winner-product-stage">
-                    <div className="winner-stage-radial-glow" />
-                    <img src={w.image} alt={w.prize} className="winner-product-img" />
-                    <span className="winner-prize-val-tag">{w.value}</span>
-                  </div>
-
-                  {/* Winner Information Hierarchy */}
-                  <div className="winner-info-body">
-                    <div className="winner-person-row">
-                      <div className="winner-avatar-initial">
-                        {w.name.charAt(0)}
-                      </div>
-                      <div className="winner-name-location">
-                        <strong className="winner-person-name">{w.name}</strong>
-                        <span className="winner-location-txt">{w.location}</span>
-                      </div>
-                    </div>
-
-                    <div className="winner-prize-details">
-                      <h4 className="winner-prize-title">{w.prize}</h4>
-                      <p className="winner-prize-spec-txt">{w.prizeSpec}</p>
-                    </div>
-
-                    <div className="winner-card-bottom-proof">
-                      <span className="winner-proof-id">{w.ticketId}</span>
-                      <span className="winner-status-delivered">{w.status}</span>
-                    </div>
-                  </div>
+                  <strong className="winner-clean-name">{w.name}</strong>
+                  <span className="winner-clean-prize">{w.won}</span>
+                  <span className="winner-clean-time">{w.time}</span>
                 </article>
               ))}
             </div>
           </div>
 
-          {/* 3. CALLOUT BANNER: Join Thousands of Winners Today! */}
+          {/* 3. CTA BANNER (Join Thousands of Winners Today!) */}
           <div className="join-winners-callout-card">
-            {/* Ambient Background Cosmic Nebulas */}
-            <div className="callout-cosmic-glow glow-left" />
-            <div className="callout-cosmic-glow glow-right" />
-            <div className="callout-cyber-grid-overlay" aria-hidden="true" />
-
-            <div className="callout-inner-flex">
-              <div className="callout-left-content">
-                {/* 3D Glowing Trophy Showcase Stage */}
-                <div className="callout-trophy-showcase">
-                  <div className="trophy-pulse-halo" />
-                  <div className="trophy-stage-disc" />
-                  <div className="trophy-gold-symbol">
-                    <Trophy size={28} className="trophy-3d-icon" />
-                  </div>
-                  <span className="sparkle-star s1">✦</span>
-                  <span className="sparkle-star s2">✦</span>
-                </div>
-
-                <div className="callout-text-box">
-                  <div className="callout-hot-badge">
-                    <Sparkles size={11} />
-                    <span>OVER ₹25 LAKHS+ REWARDS DISTRIBUTED</span>
-                  </div>
-                  <h3>Join Thousands of Winners Today!</h3>
-                  <p>Complete simple daily tasks, earn entries and get a chance to win verified prizes from VELoop Rewards.</p>
-                  
-                  {/* 3 Value Perks */}
-                  <div className="callout-perks-row">
-                    <span className="callout-perk-item">⚡ 100% Free Entry</span>
-                    <span className="callout-perk-item">🎁 Sealed Brand Prizes</span>
-                    <span className="callout-perk-item">🛡️ Direct Home Delivery</span>
-                  </div>
-                </div>
+            <div className="callout-left-group">
+              <div className="callout-trophy-gold-circle">
+                <Trophy size={24} />
               </div>
-
-              <div className="callout-right-action">
-                <button
-                  className="callout-start-now-btn"
-                  onClick={() => {
-                    if (!currentUser.isLoggedIn) {
-                      setIsLoginModalOpen(true);
-                    } else {
-                      navigateToRoute("earn");
-                    }
-                  }}
-                >
-                  <span>Start Winning Now</span>
-                  <ArrowRight size={15} />
-                </button>
-                <span className="callout-subtext">No deposit required • Free to play</span>
+              <div className="callout-text-box">
+                <h3>Join Thousands of Winners Today!</h3>
+                <p>Complete tasks, earn entries and get a chance to win amazing rewards.</p>
               </div>
+            </div>
+
+            <div className="callout-right-action">
+              <button
+                className="callout-start-now-btn"
+                onClick={() => {
+                  if (!currentUser.isLoggedIn) {
+                    setIsLoginModalOpen(true);
+                  } else {
+                    navigateToRoute("earn");
+                  }
+                }}
+              >
+                <span>Start Now</span>
+                <ArrowRight size={15} />
+              </button>
             </div>
           </div>
 
@@ -1058,16 +920,15 @@ export default function GiveawayHome() {
                 <div className="faqs-title-row">
                   <HelpCircle size={18} className="faq-blue-icon" />
                   <h3>Frequently Asked Questions</h3>
-                  <span className="faq-count-badge">4 TOP ANSWERS</span>
                 </div>
-                <p>Everything you need to know about VELoop Rewards & prize distribution.</p>
+                <p>Everything you need to know about VELoop Rewards.</p>
               </div>
 
               <button
                 className="view-faqs-link-btn"
                 onClick={() => setIsRulesModalOpen(true)}
               >
-                <span>Platform Rules</span>
+                <span>View All FAQs</span>
                 <ArrowRight size={12} />
               </button>
             </div>
@@ -1082,20 +943,19 @@ export default function GiveawayHome() {
                     onClick={() => setOpenFaqIndex(isOpen ? -1 : idx)}
                   >
                     <div className="faq-question-row">
-                      <div className="faq-q-left">
-                        <span className="faq-category-tag">{faq.category}</span>
-                        <span className="faq-question-text">{faq.q}</span>
-                      </div>
+                      <span className="faq-question-text">{faq.q}</span>
                       <span className={`faq-toggle-circle ${isOpen ? "is-open" : ""}`}>
                         {isOpen ? <Minus size={14} /> : <Plus size={14} />}
                       </span>
                     </div>
 
-                    <div className={`faq-collapsible-wrapper ${isOpen ? "expanded" : ""}`}>
-                      <div className="faq-answer-box">
-                        <p>{faq.a}</p>
+                    {isOpen && (
+                      <div className="faq-collapsible-wrapper expanded">
+                        <div className="faq-answer-box">
+                          <p>{faq.a}</p>
+                        </div>
                       </div>
-                    </div>
+                    )}
                   </div>
                 );
               })}
